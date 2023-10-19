@@ -37,10 +37,13 @@ export const GlobalStyles = createGlobalStyle`
   --border-radius-md: 7px;
   --border-radius-lg: 9px;
 
+  --font-family-main: 'Lato';
+  --font-family-accent: 'Alfa Slab One';
+
 }
 
 body {
-  font-family: 'Lato', 'Inter', Arial, Helvetica, sans-serif ;
+  font-family: var(--font-family-main), Arial, Helvetica, sans-serif ;
   background-color: var(--color-background);
   color: var(--color-text);
 

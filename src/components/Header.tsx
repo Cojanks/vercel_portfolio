@@ -1,18 +1,28 @@
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
-import HoverTooltip from './HoverTooltip';
 
 const HeaderContainer = styled.div`
   display: grid;
-  grid-template-columns: 4vw 2fr 10fr 1fr 2vw;
+  grid-template-columns: 4vw 2fr 10fr 2fr 4vw;
   grid-template-rows: 140px auto;
   align-items: center;
 `;
 
 const LogoContainer = styled.div`
   grid-column: 2;
-  font-weight: 700;
-  font-size: 2.2em;
+  font-weight: 500;
+  font-size: 2em;
+
+  @media (max-width: 1000px) {
+    display: none;
+  }
+`;
+
+const LogoText = styled.div`
+  padding: 12px;
+  border: 3px solid var(--color-text);
+  display: inline;
+  border-radius: 50%;
 `;
 
 const NavUl = styled.ul`
@@ -66,13 +76,17 @@ const NavItemLink = styled(NavLink)`
 const HamburgerContainer = styled.div`
   grid-column: 4;
   justify-self: end;
+
+  @media (min-width: 768px) {
+    display: none;
+  }
 `;
 
 function Header() {
   return (
     <HeaderContainer>
       <LogoContainer>
-        Corey Jenkins<span className="primary">_</span>{' '}
+        <LogoText>C J </LogoText>
       </LogoContainer>
       <NavUl>
         <NavItem>
