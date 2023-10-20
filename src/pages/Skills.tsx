@@ -1,25 +1,38 @@
 import { useQuery } from '@tanstack/react-query';
-import { getSkills } from '../services/apiSkills';
-import { listenerCancelled } from '@reduxjs/toolkit/dist/listenerMiddleware/exceptions';
+import CategoryList from '../components/CategoryList';
+import { getAPICategories, getAPITags } from '../services/apiDefinitions';
+import SpinnerOfDoom from '../components/SpinnerOfDoom';
+import Error from './Error';
 
 function Skills() {
   const {
-    isLoading,
-    data: skills,
-    error,
+    isLoading: categoryLoading,
+    data: categoriesData,
+    error: categoryError,
   } = useQuery({
-    queryKey: ['skills'],
-    queryFn: getSkills,
+    queryKey: ['categories'],
+    queryFn: getAPICategories,
   });
 
+  const {
+    isLoading: tagLoading,
+    data: tagData,
+    error: tagError,
+  } = useQuery({ queryKey: ['tags'], queryFn: getAPITags });
+
+  // console.log(categoriesData);
+  // console.log(tagData);
+
+  if (categoryLoading || tagLoading) return <SpinnerOfDoom />;
+  if (categoryError || tagError) return <Error />;
   return (
     <div>
-      <ul>
-        {skills &&
-          skills.map((skill) => {
-            return <li>{skill.name}</li>;
-          })}
-      </ul>
+      <h2>Time to flex, eh?</h2>
+      <p>Looking for skills? I got your skills</p>
+
+      {categoriesData && (
+        <CategoryList categories={categoriesData} tags={tagData}></CategoryList>
+      )}
     </div>
   );
 }

@@ -1,8 +1,8 @@
-import { getCategories, getTags } from '../store/slices/definitionsSlice';
+import { setTags } from '../store/slices/definitionsSlice';
 import { dispatch } from '../store/store';
 import supabase from './supabase';
 
-export async function getDefinitions() {
+export async function getAPITags() {
   const { data: tags, error: tagError } = await supabase
     .from('skill_tags')
     .select();
@@ -12,8 +12,11 @@ export async function getDefinitions() {
     throw new Error('Tags not found');
   }
 
-  dispatch(getTags({ tags: tags }));
+  dispatch(setTags({ tags: tags }));
+  return tags;
+}
 
+export async function getAPICategories() {
   const { data: categories, error: categoriesError } = await supabase
     .from('skill_categories')
     .select();
@@ -22,5 +25,6 @@ export async function getDefinitions() {
     console.error(categoriesError);
     throw new Error('Tags not found');
   }
-  dispatch(getCategories({ categories: categories }));
+
+  return categories;
 }

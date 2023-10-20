@@ -21,5 +21,5 @@ export type CategoryDefinitionsType = {
 
 export type DefinitionsType = {
   tags: TagDefinitionsType;
-  categories: CategoryDefinitionsType;
+  errors: string[];
 };

@@ -1,16 +1,16 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { CategoryDBType, DefinitionsType, TagDBType } from '../../types';
+import { DefinitionsType, TagDBType } from '../../types';
 
 const initialState: DefinitionsType = {
   tags: {},
-  categories: {},
+  errors: [],
 };
 
 export const definitionsSlice = createSlice({
   name: 'tagDefinitions',
   initialState,
   reducers: {
-    getTags: (
+    setTags: (
       state: DefinitionsType,
       action: PayloadAction<{ tags: TagDBType[] }>
     ) => {
@@ -21,25 +21,8 @@ export const definitionsSlice = createSlice({
               return { ...accumulator, [value.id]: value.name };
             }, {});
     },
-    getCategories: (
-      state: DefinitionsType,
-      action: PayloadAction<{ categories: CategoryDBType[] }>
-    ) => {
-      state.categories =
-        Object.keys(state.categories).length >= 1
-          ? state.categories
-          : action.payload.categories.reduce((accumulator, cat) => {
-              return {
-                ...accumulator,
-                [cat.id]: {
-                  name: cat.name,
-                  description: cat.description,
-                },
-              };
-            }, {});
-    },
   },
 });
 
-export const { getTags, getCategories } = definitionsSlice.actions;
+export const { setTags } = definitionsSlice.actions;
 export default definitionsSlice.reducer;
