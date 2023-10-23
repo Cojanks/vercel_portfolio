@@ -7,7 +7,7 @@ import { store } from '../store/store.ts';
 
 const StyledMain = styled.main`
   display: flex;
-  margin: 0 4vw;
+  margin: 0 5vw;
 `;
 
 function AppLayout() {

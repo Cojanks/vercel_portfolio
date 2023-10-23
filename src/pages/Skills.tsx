@@ -3,6 +3,13 @@ import CategoryList from '../components/CategoryList';
 import { getAPICategories, getAPITags } from '../services/apiDefinitions';
 import SpinnerOfDoom from '../components/SpinnerOfDoom';
 import Error from './Error';
+import { useSelector } from '../store/store';
+import styled from 'styled-components';
+
+const SectionContainer = styled.div`
+  display: block;
+  width: 100%;
+`;
 
 function Skills() {
   const {
@@ -20,20 +27,20 @@ function Skills() {
     error: tagError,
   } = useQuery({ queryKey: ['tags'], queryFn: getAPITags });
 
-  // console.log(categoriesData);
-  // console.log(tagData);
+  const tags = useSelector((state) => state.definitions.tags);
 
   if (categoryLoading || tagLoading) return <SpinnerOfDoom />;
   if (categoryError || tagError) return <Error />;
+
   return (
-    <div>
+    <SectionContainer>
       <h2>Time to flex, eh?</h2>
       <p>Looking for skills? I got your skills</p>
 
       {categoriesData && (
-        <CategoryList categories={categoriesData} tags={tagData}></CategoryList>
+        <CategoryList categories={categoriesData} tags={tags}></CategoryList>
       )}
-    </div>
+    </SectionContainer>
   );
 }
 

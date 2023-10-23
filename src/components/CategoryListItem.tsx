@@ -1,27 +1,66 @@
 import styled from 'styled-components';
+import { CategoryDBType, TagDefinitionsType } from '../types';
+import Card from './Card';
+import PillTag from './PillTag';
 
-const ListItemLi = styled.li`
+const ListItem_Li = styled.li`
   display: flex;
   flex-direction: row;
+  width: 100%;
+  margin-bottom: 55px;
 `;
 
-const ListItemCategoryContaier = styled.div`
+const ListItem_SectionContaier = styled.div`
   display: flex;
   flex: 1;
+  width: 100%;
+  flex-wrap: wrap;
+  margin: 0 20px;
 `;
 
-const ListItemTagsContaier = styled.div`
-  display: flex;
-  flex: 1;
+const ListItemLi_H3 = styled.h3`
+  width: 100%;
+  margin-top: 0px;
+  margin-bottom: 7px;
 `;
 
-function CategoryListItem({ item }: any) {
+const ListItemLi_p = styled.p`
+  margin-top: 0px;
+  color: var(--color-text-secondary);
+`;
+
+function CategoryListItem({
+  item,
+  tags,
+}: {
+  item: CategoryDBType;
+  tags: TagDefinitionsType;
+}) {
   console.log(item);
+  console.log(tags);
   return (
-    <ListItemLi>
-      <ListItemCategoryContaier>category</ListItemCategoryContaier>
-      <ListItemTagsContaier>tags</ListItemTagsContaier>
-    </ListItemLi>
+    <ListItem_Li>
+      <ListItem_SectionContaier>
+        <ListItemLi_H3>{item.name}</ListItemLi_H3>
+        <ListItemLi_p>{item.description}</ListItemLi_p>
+      </ListItem_SectionContaier>
+      <ListItem_SectionContaier>
+        {' '}
+        <Card
+          borderColor="var(--color-secondary)"
+          padding="25px"
+          boxShadow="0px 0 10px var(--color-secondary)"
+        >
+          {item.tag_ids.map((id) => {
+            return (
+              <PillTag key={id} type="primary" inverted={false}>
+                {tags[id]}
+              </PillTag>
+            );
+          })}
+        </Card>
+      </ListItem_SectionContaier>
+    </ListItem_Li>
   );
 }
 

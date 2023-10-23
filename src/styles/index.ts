@@ -7,10 +7,10 @@ export const GlobalStyles = createGlobalStyle`
 
 :root {
   /* Category */
-  --color-background: #1a1a1d;
+  --color-background: #1a171e;
 
   --color-text: #d1d5db;
-  --color-text-secondary: #4e4e50;
+  --color-text-secondary: #6b7280;
 
   --color-primary: #c3073f;
   --color-secondary: #6f2232;
@@ -32,13 +32,16 @@ export const GlobalStyles = createGlobalStyle`
   --color-grey-900: #111827;
 
 
-  --border-radius-tiny: 3px;
-  --border-radius-sm: 5px;
-  --border-radius-md: 7px;
-  --border-radius-lg: 9px;
+  --border-radius-tiny: 5px;
+  --border-radius-sm: 8px;
+  --border-radius-md: 11px;
+  --border-radius-lg: 14px;
+  --border-radius-xlg: 18px;
 
   --font-family-main: 'Lato';
+  --font-family-secondary: 'Helvetica';
   --font-family-accent: 'Alfa Slab One';
+  
 
 }
 

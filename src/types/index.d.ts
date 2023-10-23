@@ -13,10 +13,7 @@ export type CategoryDBType = {
   id: number;
   name: string;
   description: string;
-};
-
-export type CategoryDefinitionsType = {
-  [key as number]: { name: string; description: string };
+  tag_ids: number[];
 };
 
 export type DefinitionsType = {

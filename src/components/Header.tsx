@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const HeaderContainer = styled.div`
   display: grid;
-  grid-template-columns: 4vw 2fr 10fr 2fr 4vw;
+  grid-template-columns: 5vw 2fr 10fr 2fr 5vw;
   grid-template-rows: 140px auto;
   align-items: center;
 `;
