@@ -21,11 +21,10 @@ function Skills() {
     queryFn: getAPICategories,
   });
 
-  const {
-    isLoading: tagLoading,
-    data: tagData,
-    error: tagError,
-  } = useQuery({ queryKey: ['tags'], queryFn: getAPITags });
+  const { isLoading: tagLoading, error: tagError } = useQuery({
+    queryKey: ['tags'],
+    queryFn: getAPITags,
+  });
 
   const tags = useSelector((state) => state.definitions.tags);
 

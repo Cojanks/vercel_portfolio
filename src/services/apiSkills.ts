@@ -1,8 +1,8 @@
-import { getDefinitions } from './apiDefinitions';
+import { getAPICategories } from './apiDefinitions';
 import supabase from './supabase';
 
 export async function getSkills() {
-  getDefinitions();
+  getAPICategories();
   const { data, error } = await supabase.from('examples').select();
 
   if (error) {

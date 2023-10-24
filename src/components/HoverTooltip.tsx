@@ -20,11 +20,7 @@ const ChildrenSpan = styled.span`
   position: relative;
 `;
 
-function HoverTooltip({
-  children,
-  content,
-  position = 'top',
-}: HoverTooltipType) {
+function HoverTooltip({ children, content }: HoverTooltipType) {
   const [showTooltip, setshowTooltip] = useState(true);
 
   return (
