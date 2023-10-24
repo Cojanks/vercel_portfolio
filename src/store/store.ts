@@ -6,10 +6,12 @@ import {
   TypedUseSelectorHook,
 } from 'react-redux';
 import definitionsReducer from './slices/definitionsSlice';
+import easterEggsReducer from './slices/easterEggsSlice';
 
 const store = configureStore({
   reducer: {
     definitions: definitionsReducer,
+    easterEggs: easterEggsReducer,
   },
 });
 

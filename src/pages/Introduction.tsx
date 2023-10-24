@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { deviceQuery } from '../styles/breakpoints';
 import { motion } from 'framer-motion';
 import { scriptDetails } from '../data/introScript';
+import { useState } from 'react';
 
 const IntroductionSection = styled.section`
   width: 100%;
@@ -34,6 +35,11 @@ const StyledIntroductionText = styled.div`
 `;
 const StyledIntroductionTextItem = styled.div`
   margin-bottom: 10px;
+
+  &.whisper {
+    font-size: 0.8em;
+    color: var(--color-text-secondary);
+  }
 
   &:before {
     content: '/>';
@@ -85,6 +91,7 @@ const StyledH1 = styled.h1`
     justify-content: center;
   }
 `;
+
 function Introduction() {
   return (
     <IntroductionSection>
@@ -99,10 +106,12 @@ function Introduction() {
                 delay: delayVal,
                 ease: 'anticipate',
                 duration: 3,
-                times: [0, 0.5, 1],
+                times: [0, 0.6, 1],
               }}
             >
-              <StyledIntroductionTextItem>
+              <StyledIntroductionTextItem
+                className={`${i + 1 === 6 ? 'whisper' : ''}`}
+              >
                 {scriptDetails.script[i + 1]}
               </StyledIntroductionTextItem>
             </motion.div>

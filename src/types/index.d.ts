@@ -20,3 +20,17 @@ export type DefinitionsType = {
   tags: TagDefinitionsType;
   errors: string[];
 };
+
+export type EggListType = {
+  logoClicked5: boolean;
+  logoClicked15: boolean;
+};
+
+export type InteractionsListType = {
+  logoClicks: number;
+};
+
+export interface EasterEggsStoreType {
+  eggList: EggListType;
+  interactionsList: InteractionsListType;
+}

@@ -1,6 +1,8 @@
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import { deviceQuery } from '../styles/breakpoints';
+import { dispatch } from '../store/store';
+import { logoClicked } from '../store/slices/easterEggsSlice';
 
 const HeaderContainer = styled.div`
   position: relative;
@@ -24,6 +26,7 @@ const LogoContainer = styled.div`
   font-weight: 500;
   font-size: 2em;
   text-align: center;
+  cursor: pointer;
 
   @media only screen and (${deviceQuery.mobileTabletMax}) {
     display: none;
@@ -104,10 +107,19 @@ const NavItemLink = styled(NavLink)`
 `;
 
 function Header() {
+  function handleLogoClick() {
+    dispatch(logoClicked());
+  }
   return (
     <HeaderContainer>
       <LogoContainer>
-        <LogoText>C J </LogoText>
+        <LogoText
+          onClick={() => {
+            handleLogoClick();
+          }}
+        >
+          C J{' '}
+        </LogoText>
       </LogoContainer>
       <NavUl role="navigation">
         <NavItem>
