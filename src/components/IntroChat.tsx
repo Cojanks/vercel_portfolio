@@ -29,6 +29,8 @@ const StyledIntroductionTextItem = styled.div`
 function IntroChat({ animationComplete }: { animationComplete: () => void }) {
   const [scriptIndex, setscriptIndex] = useState<number>(1);
 
+  const durationVal = scriptIndex === 2 || scriptIndex === 4 ? 6 : 3;
+
   function handleCompleteAnimation() {
     if (scriptIndex < Object.keys(chatScript.script).length) {
       setscriptIndex((state) => state + 1);
@@ -45,8 +47,8 @@ function IntroChat({ animationComplete }: { animationComplete: () => void }) {
           transition={{
             delay: chatScript.delay,
             ease: 'anticipate',
-            duration: 4,
-            times: [0, 0.5, 0.85, 1],
+            duration: durationVal,
+            times: [0, 0.25, 0.85, 1],
           }}
           onAnimationComplete={() => {
             handleCompleteAnimation();

@@ -110,7 +110,7 @@ const StyledH1 = styled.h1`
 function Introduction() {
   const screenSize = useScreenSize();
   const [hasChatAnimationCompleted, sethasChatAnimationCompleted] =
-    useState(true);
+    useState(false);
 
   return (
     <IntroductionSection>
@@ -158,9 +158,9 @@ function Introduction() {
           animate={{ x: [0, 5, 5], opacity: [0, 1, 1] }}
           style={{ order: '2' }}
           transition={{
-            delay: 0.6,
+            delay: 0.4,
             ease: 'anticipate',
-            duration: 2,
+            duration: 1,
             times: [0, 0.5, 1],
           }}
         >

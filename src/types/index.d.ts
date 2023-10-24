@@ -1,4 +1,4 @@
-// Tags
+// API
 export type TagDefinitionsType = {
   [key: number]: string;
 };
@@ -8,7 +8,6 @@ export type TagDBType = {
   name: string;
 };
 
-// Desc
 export type CategoryDBType = {
   id: number;
   name: string;
@@ -21,6 +20,7 @@ export type DefinitionsType = {
   errors: string[];
 };
 
+// Easter Eggs
 export type EggListType = {
   logoClicked5: boolean;
   logoClicked15: boolean;
