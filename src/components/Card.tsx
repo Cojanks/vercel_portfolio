@@ -14,7 +14,6 @@ type CardType = {
 } & PropsWithChildren;
 
 const CardContainer = styled.div<CardType>`
-  width: 100%;
   border-radius: var(--border-radius-md);
 
   padding: ${(props) => (props.$padding ? props.$padding : '7px')};

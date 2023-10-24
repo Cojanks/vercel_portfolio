@@ -9,7 +9,7 @@ type CategoryListType = {
 
 const CategoryListContainer = styled.div`
   display: flex;
-  max-width: 1200px;
+  max-width: 1400px;
   width: 100%;
 `;
 const CategoryListul = styled.ul`

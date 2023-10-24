@@ -2,18 +2,21 @@ import styled from 'styled-components';
 import { CategoryDBType, TagDefinitionsType } from '../types';
 import Card from './Card';
 import PillTag from './PillTag';
+import { deviceQuery } from '../styles/breakpoints';
 
 const ListItem_Li = styled.li`
   display: flex;
   flex-direction: row;
   width: 100%;
   margin-bottom: 55px;
+
+  @media only screen and (${deviceQuery.tabletMax}) {
+    flex-direction: column;
+  }
 `;
 
 const ListItem_SectionContaier = styled.div`
-  display: flex;
   flex: 1;
-  width: 100%;
   flex-wrap: wrap;
   margin: 0 20px;
 `;
@@ -27,6 +30,13 @@ const ListItemLi_H3 = styled.h3`
 const ListItemLi_p = styled.p`
   margin-top: 0px;
   color: var(--color-text-secondary);
+`;
+
+const PillCOntainer = styled.div`
+  display: flex;
+  gap: 7px;
+  justify-content: flex-start;
+  flex-wrap: wrap;
 `;
 
 function CategoryListItem({
@@ -51,13 +61,15 @@ function CategoryListItem({
           padding="25px"
           boxShadow="0px 0 10px var(--color-secondary)"
         >
-          {item.tag_ids.map((id) => {
-            return (
-              <PillTag key={id} type="primary" inverted={false}>
-                {tags[id]}
-              </PillTag>
-            );
-          })}
+          <PillCOntainer>
+            {item.tag_ids.map((id) => {
+              return (
+                <PillTag key={id} type="primary" inverted={false}>
+                  {tags[id]}
+                </PillTag>
+              );
+            })}
+          </PillCOntainer>
         </Card>
       </ListItem_SectionContaier>
     </ListItem_Li>

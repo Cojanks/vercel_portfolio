@@ -19,7 +19,8 @@ export async function getAPITags() {
 export async function getAPICategories() {
   const { data: categories, error: categoriesError } = await supabase
     .from('skill_categories')
-    .select();
+    .select()
+    .order('id', { ascending: true });
 
   if (categoriesError) {
     console.error(categoriesError);

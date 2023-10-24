@@ -20,11 +20,10 @@ const PillTagContainer = styled.div<{
 
   padding: 8px 14px;
   display: inline-block;
-  margin-right: 10px;
   border-radius: var(--border-radius-xlg);
   border: 2px solid transparent;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: 0.5px;
   font-family: var(--font-family-secondary);
 

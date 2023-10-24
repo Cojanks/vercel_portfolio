@@ -32,5 +32,5 @@ export type InteractionsListType = {
 
 export interface EasterEggsStoreType {
   eggList: EggListType;
-  interactionsList: InteractionsListType;
+  eggInteractionsList: InteractionsListType;
 }

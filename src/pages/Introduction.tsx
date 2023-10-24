@@ -1,8 +1,10 @@
 import styled from 'styled-components';
-import { deviceQuery } from '../styles/breakpoints';
-import { motion } from 'framer-motion';
-import { scriptDetails } from '../data/introScript';
+import { deviceQuery, deviceSizeNum } from '../styles/breakpoints';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
+import useScreenSize from '../hooks/useScreenSize';
+import IntroChat from '../components/IntroChat';
+import { introSubtitles } from '../data/introScript';
 
 const IntroductionSection = styled.section`
   width: 100%;
@@ -17,6 +19,7 @@ const IntroductionSection = styled.section`
 
   @media only screen and (${deviceQuery.mobileOnlyMax}) {
     flex-direction: column;
+    padding-top: 40px;
   }
 `;
 
@@ -30,28 +33,40 @@ const StyledIntroductionText = styled.div`
   font-size: 1.2em;
 
   @media only screen and (${deviceQuery.mobileOnlyMax}) {
-    display: none;
+    margin-top: 15px;
+    flex-direction: row;
+    font-size: 1.2em;
+    align-items: center;
+    justify-content: space-evenly;
   }
 `;
-const StyledIntroductionTextItem = styled.div`
-  margin-bottom: 10px;
 
-  &.whisper {
-    font-size: 0.8em;
-    color: var(--color-text-secondary);
+const StyledMobileOnlyIntroduction = styled.div`
+  display: none;
+  font-size: 1em;
+
+  @media only screen and (${deviceQuery.mobileOnlyMax}) {
+    display: block;
+    text-align: center;
+    margin-bottom: 25px;
   }
+`;
 
-  &:before {
-    content: '/>';
-    position: absolute;
-    left: -25px;
-    color: var(--color-text-secondary);
+const StyledSummeryContainer = styled.div`
+  @media only screen and (${deviceQuery.mobileOnlyMax}) {
+    display: flex;
   }
+  @media only screen and (${deviceQuery.mobileTabletMin}) {
+    width: calc(100% - 15px);
+  }
+`;
+const StyledSummeryText = styled.div`
+  @media only screen and (${deviceQuery.mobileTabletMin}) {
+    margin-bottom: 10px;
 
-  @media only screen and (${deviceQuery.tabletMax}) {
-    &:before {
-      left: -16px;
-      content: '>';
+    &.primary {
+      font-size: 1.2em;
+      font-weight: 400;
     }
   }
 `;
@@ -93,52 +108,75 @@ const StyledH1 = styled.h1`
 `;
 
 function Introduction() {
+  const screenSize = useScreenSize();
+  const [hasChatAnimationCompleted, sethasChatAnimationCompleted] =
+    useState(true);
+
   return (
     <IntroductionSection>
       <StyledIntroductionText>
-        {Object.keys(scriptDetails.script).map((oneKey, i) => {
-          let delayVal = scriptDetails.delay * i + 1;
-          return (
-            <motion.div
-              key={oneKey}
-              animate={{ x: [0, 5, 5], opacity: [0, 1, 1] }}
-              transition={{
-                delay: delayVal,
-                ease: 'anticipate',
-                duration: 3,
-                times: [0, 0.6, 1],
+        {screenSize.width >= deviceSizeNum.mobileTabletMin &&
+          !hasChatAnimationCompleted && (
+            <IntroChat
+              animationComplete={() => {
+                sethasChatAnimationCompleted(true);
               }}
-            >
-              <StyledIntroductionTextItem
-                className={`${i + 1 === 6 ? 'whisper' : ''}`}
-              >
-                {scriptDetails.script[i + 1]}
-              </StyledIntroductionTextItem>
-            </motion.div>
-          );
-        })}
+            />
+          )}
+
+        {hasChatAnimationCompleted && (
+          <AnimatePresence>
+            {Object.keys(introSubtitles).map((key, i) => {
+              const delayVal = 0.5 * (i - 1) + 1;
+              return (
+                <StyledSummeryContainer key={i}>
+                  <motion.div
+                    key={`summary${key}`}
+                    animate={{ x: [0, 5, 5], opacity: [0, 1, 1] }}
+                    transition={{
+                      delay: delayVal,
+                      ease: 'anticipate',
+                      duration: 3,
+                      times: [0, 0.6, 1],
+                    }}
+                  >
+                    <StyledSummeryText
+                      className={i === 0 ? 'primary' : 'whisper'}
+                    >
+                      {introSubtitles[i + 1]}
+                    </StyledSummeryText>
+                  </motion.div>
+                </StyledSummeryContainer>
+              );
+            })}
+          </AnimatePresence>
+        )}
       </StyledIntroductionText>
 
-      <motion.div
-        animate={{ x: [0, 5, 5], opacity: [0, 1, 1] }}
-        style={{ order: '2' }}
-        transition={{
-          delay: 0.8,
-          ease: 'anticipate',
-          duration: 2,
-          times: [0, 0.5, 1],
-        }}
-      >
-        <StyledBR></StyledBR>
-      </motion.div>
+      {screenSize.width >= deviceSizeNum.mobileTabletMin && (
+        <motion.div
+          animate={{ x: [0, 5, 5], opacity: [0, 1, 1] }}
+          style={{ order: '2' }}
+          transition={{
+            delay: 0.6,
+            ease: 'anticipate',
+            duration: 2,
+            times: [0, 0.5, 1],
+          }}
+        >
+          <StyledBR></StyledBR>
+        </motion.div>
+      )}
+
+      <StyledMobileOnlyIntroduction>Hello. I am..</StyledMobileOnlyIntroduction>
 
       <StyledH1>
         <motion.div
           animate={{ x: [0, 5, 5], opacity: [0, 1, 1] }}
           transition={{
-            delay: 0.4,
+            delay: 0.2,
             ease: 'anticipate',
-            duration: 2,
+            duration: 1,
             times: [0, 0.5, 1],
           }}
         >

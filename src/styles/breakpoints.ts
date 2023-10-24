@@ -1,4 +1,22 @@
-interface Size {
+interface SizeNum {
+  mobileOnlyMax: number;
+  mobileTabletMin: number;
+  mobileTabletMax: number;
+  tabletMin: number;
+  tabletMax: number;
+  desktopMin: number;
+}
+
+export const deviceSizeNum: SizeNum = {
+  mobileOnlyMax: 600,
+  mobileTabletMin: 601,
+  mobileTabletMax: 767,
+  tabletMin: 768,
+  tabletMax: 1000,
+  desktopMin: 1001,
+};
+
+interface SizeStr {
   mobileOnlyMax: string;
   mobileTabletMin: string;
   mobileTabletMax: string;
@@ -7,7 +25,7 @@ interface Size {
   desktopMin: string;
 }
 
-export const deviceSize: Size = {
+const deviceSizeString: SizeStr = {
   mobileOnlyMax: '600px',
   mobileTabletMin: '601px',
   mobileTabletMax: '767px',
@@ -17,10 +35,10 @@ export const deviceSize: Size = {
 };
 
 export const deviceQuery = {
-  mobileOnlyMax: `max-width: ${deviceSize.mobileOnlyMax}`,
-  mobileTabletMin: `min-width: ${deviceSize.mobileTabletMin}`,
-  mobileTabletMax: `max-width: ${deviceSize.mobileTabletMax}`,
-  tabletMin: `min-width: ${deviceSize.tabletMin}`,
-  tabletMax: `max-width: ${deviceSize.tabletMax}`,
-  desktopMin: `min-width: ${deviceSize.desktopMin}`,
+  mobileOnlyMax: `max-width: ${deviceSizeString.mobileOnlyMax}`,
+  mobileTabletMin: `min-width: ${deviceSizeString.mobileTabletMin}`,
+  mobileTabletMax: `max-width: ${deviceSizeString.mobileTabletMax}`,
+  tabletMin: `min-width: ${deviceSizeString.tabletMin}`,
+  tabletMax: `max-width: ${deviceSizeString.tabletMax}`,
+  desktopMin: `min-width: ${deviceSizeString.desktopMin}`,
 };

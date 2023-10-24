@@ -57,4 +57,10 @@ body {
   color: var(--color-primary);
 }
 
+.whisper {
+    color: var(--color-text-secondary);
+  }
+
+
+
 `;

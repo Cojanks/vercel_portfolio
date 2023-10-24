@@ -3,7 +3,7 @@ import { EasterEggsStoreType } from '../../types';
 
 const initialState: EasterEggsStoreType = {
   eggList: { logoClicked5: false, logoClicked15: false },
-  interactionsList: { logoClicks: 0 },
+  eggInteractionsList: { logoClicks: 0 },
 };
 
 export const easterEggsSlice = createSlice({
@@ -11,7 +11,7 @@ export const easterEggsSlice = createSlice({
   initialState,
   reducers: {
     logoClicked: (state: EasterEggsStoreType) => {
-      const newClickAmount = state.interactionsList.logoClicks + 1;
+      const newClickAmount = state.eggInteractionsList.logoClicks + 1;
       switch (newClickAmount) {
         case 5:
           state.eggList.logoClicked5 = true;
@@ -22,7 +22,7 @@ export const easterEggsSlice = createSlice({
         default:
           break;
       }
-      state.interactionsList.logoClicks = newClickAmount;
+      state.eggInteractionsList.logoClicks = newClickAmount;
     },
   },
 });
