@@ -5,6 +5,8 @@ import { GlobalStyles } from './styles';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import Skills from './pages/Skills';
+import History from './pages/History';
+import Contact from './pages/Contact';
 
 export const queryClient = new QueryClient({
   defaultOptions: {
@@ -25,6 +27,14 @@ const router = createBrowserRouter([
       {
         path: '/skills',
         element: <Skills />,
+      },
+      {
+        path: '/history',
+        element: <History />,
+      },
+      {
+        path: '/contact',
+        element: <Contact />,
       },
     ],
   },

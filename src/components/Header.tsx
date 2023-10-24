@@ -1,19 +1,31 @@
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
+import { deviceQuery } from '../styles/breakpoints';
 
 const HeaderContainer = styled.div`
+  position: relative;
   display: grid;
-  grid-template-columns: 5vw 2fr 10fr 2fr 5vw;
+  grid-template-columns: 12vw 10fr 12vw;
   grid-template-rows: 140px auto;
   align-items: center;
+  background-color: var(--color-background);
+
+  @media only screen and (${deviceQuery.mobileTabletMax}) {
+    grid-template-columns: 10fr;
+    grid-template-rows: 80px auto;
+    position: sticky;
+    top: 0;
+    border-bottom: 1px solid var(--color-grey-700);
+  }
 `;
 
 const LogoContainer = styled.div`
-  grid-column: 2;
+  grid-column: 1;
   font-weight: 500;
   font-size: 2em;
+  text-align: center;
 
-  @media (max-width: 1000px) {
+  @media only screen and (${deviceQuery.mobileTabletMax}) {
     display: none;
   }
 `;
@@ -26,18 +38,36 @@ const LogoText = styled.div`
 `;
 
 const NavUl = styled.ul`
-  grid-column: 3;
+  grid-column: 2;
   list-style: none;
   display: flex;
   flex-direction: row;
   justify-content: center;
+  text-align: center;
+  align-items: center;
+  padding: 0;
+
+  @media only screen and (${deviceQuery.mobileTabletMax}) {
+    grid-column: 1;
+  }
 `;
 
 const NavItem = styled.li`
   display: flex;
+  justify-content: center;
   margin: 0 25px;
   font-weight: 300;
   font-size: 1.3em;
+
+  @media only screen and (${deviceQuery.mobileTabletMax}) {
+    margin: 0 15px;
+    font-size: 1.1em;
+  }
+
+  @media only screen and (${deviceQuery.mobileOnlyMax}) {
+    margin: 0 10px;
+    flex: 1 1 auto;
+  }
 `;
 
 const NavItemLink = styled(NavLink)`
@@ -73,22 +103,13 @@ const NavItemLink = styled(NavLink)`
   }
 `;
 
-const HamburgerContainer = styled.div`
-  grid-column: 4;
-  justify-self: end;
-
-  @media (min-width: 768px) {
-    display: none;
-  }
-`;
-
 function Header() {
   return (
     <HeaderContainer>
       <LogoContainer>
         <LogoText>C J </LogoText>
       </LogoContainer>
-      <NavUl>
+      <NavUl role="navigation">
         <NavItem>
           <NavItemLink to={'/'}>Introduction</NavItemLink>
         </NavItem>
@@ -102,7 +123,6 @@ function Header() {
           <NavItemLink to="/contact">Contact</NavItemLink>
         </NavItem>
       </NavUl>
-      <HamburgerContainer>Hamburger</HamburgerContainer>
     </HeaderContainer>
   );
 }

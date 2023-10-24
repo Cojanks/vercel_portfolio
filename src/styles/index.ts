@@ -12,8 +12,9 @@ export const GlobalStyles = createGlobalStyle`
   --color-text: #d1d5db;
   --color-text-secondary: #6b7280;
 
-  --color-primary: #c3073f;
+  --color-primary: #e92d77;
   --color-secondary: #6f2232;
+  --color-tertiary: #ae27fe;
 
 
 
@@ -40,9 +41,7 @@ export const GlobalStyles = createGlobalStyle`
 
   --font-family-main: 'Lato';
   --font-family-secondary: 'Helvetica';
-  --font-family-accent: 'Alfa Slab One';
-  
-
+  --font-family-accent: 'Gabarito';
 }
 
 body {
