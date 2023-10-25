@@ -43,12 +43,13 @@ const StyledIntroductionText = styled.div`
 
 const StyledMobileOnlyIntroduction = styled.div`
   display: none;
-  font-size: 1em;
+  font-size: 1.3em;
+  font-weight: 300;
 
   @media only screen and (${deviceQuery.mobileOnlyMax}) {
     display: block;
     text-align: center;
-    margin-bottom: 25px;
+    margin: 25px 0;
   }
 `;
 
@@ -102,6 +103,7 @@ const StyledH1 = styled.h1`
   }
 
   @media only screen and (${deviceQuery.mobileOnlyMax}) {
+    order: revert;
     text-align: center;
     justify-content: center;
   }
@@ -168,7 +170,9 @@ function Introduction() {
         </motion.div>
       )}
 
-      <StyledMobileOnlyIntroduction>Hello. I am..</StyledMobileOnlyIntroduction>
+      <StyledMobileOnlyIntroduction>
+        Hi. My name is
+      </StyledMobileOnlyIntroduction>
 
       <StyledH1>
         <motion.div
@@ -183,6 +187,11 @@ function Introduction() {
           Corey Jenkins
         </motion.div>
       </StyledH1>
+
+      <StyledMobileOnlyIntroduction>
+        &lt;&gt; I build <span className="primary">delightful</span> Front End
+        experiences. &lt;/&gt;
+      </StyledMobileOnlyIntroduction>
     </IntroductionSection>
   );
 }
