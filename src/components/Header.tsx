@@ -200,17 +200,39 @@ function Header() {
           </NavItemLink>
         </NavItem>
         <NavItem>
-          <NavItemLink to="/skills">Skills & Qualifications</NavItemLink>
+          <NavItemLink
+            to="/skills"
+            onClick={() => {
+              setDidSomeoneOrderAnOpenSandwich(false);
+            }}
+          >
+            Skills & Qualifications
+          </NavItemLink>
         </NavItem>
         <NavItem>
-          <NavItemLink to="/history">History</NavItemLink>
+          <NavItemLink
+            to="/history"
+            onClick={() => {
+              setDidSomeoneOrderAnOpenSandwich(false);
+            }}
+          >
+            History
+          </NavItemLink>
         </NavItem>
         <NavItem>
-          <NavItemLink to="/contact">Contact</NavItemLink>
+          <NavItemLink
+            to="/contact"
+            onClick={() => {
+              setDidSomeoneOrderAnOpenSandwich(false);
+            }}
+          >
+            Contact
+          </NavItemLink>
         </NavItem>
       </NavUl>
       <HamburgerContainer>
         <Hamburger
+          didSomeoneOrderAnOpenSandwich={didSomeoneOrderAnOpenSandwich}
           handleHamburgerToggle={() => {
             toggleMobileMenuState();
           }}

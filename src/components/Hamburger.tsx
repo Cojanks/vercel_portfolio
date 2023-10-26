@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { deviceQuery } from '../styles/breakpoints';
-import { useEffect, useState } from 'react';
 
 const HamburgerContainer = styled.button`
   font: inherit;
@@ -83,16 +82,15 @@ const Inner = styled.div`
 
 function Hamburger({
   handleHamburgerToggle,
+  didSomeoneOrderAnOpenSandwich,
 }: {
   handleHamburgerToggle: () => void;
+  didSomeoneOrderAnOpenSandwich: boolean;
 }) {
-  const [toggled, setToggled] = useState(false);
-
   return (
     <HamburgerContainer
-      className={toggled ? 'the-ham-is-active' : ''}
+      className={didSomeoneOrderAnOpenSandwich ? 'the-ham-is-active' : ''}
       onClick={() => {
-        setToggled((state) => !state);
         handleHamburgerToggle();
       }}
     >
