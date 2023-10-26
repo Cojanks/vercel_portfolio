@@ -4,7 +4,7 @@ import { deviceQuery } from '../styles/breakpoints';
 import { dispatch } from '../store/store';
 import { logoClicked } from '../store/slices/easterEggsSlice';
 import Hamburger from './Hamburger';
-import { SyntheticEvent, useState } from 'react';
+import { useState } from 'react';
 
 const HeaderContainer = styled.div`
   position: relative;
