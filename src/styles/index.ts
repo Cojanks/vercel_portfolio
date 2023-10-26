@@ -42,15 +42,24 @@ export const GlobalStyles = createGlobalStyle`
   --font-family-main: 'Lato';
   --font-family-secondary: 'Helvetica';
   --font-family-accent: 'Gabarito';
+
+  --nav-height: 140;
+  --nav-height-mobile: 80;
+
 }
 
+html {
+  height: 100%;
+}
 body {
   font-family: var(--font-family-main), Arial, Helvetica, sans-serif ;
   background-color: var(--color-background);
   color: var(--color-text);
+  font-weight: 400;
+  height: 100%;
+
 
   transition: color 0.3s, background-color 0.3s;
-  min-height: 100vh;
 }
 
 .primary {
@@ -59,7 +68,12 @@ body {
 
 .whisper {
     color: var(--color-text-secondary);
-  }
+}
+
+.bold {
+  font-weight: 400;
+}
+
 
 
 

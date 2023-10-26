@@ -9,6 +9,7 @@ import styled from 'styled-components';
 const SectionContainer = styled.div`
   display: block;
   width: 100%;
+  margin: 0 25px;
 `;
 
 function Skills() {

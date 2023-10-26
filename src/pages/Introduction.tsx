@@ -8,7 +8,7 @@ import { introSubtitles } from '../data/introScript';
 
 const IntroductionSection = styled.section`
   width: 100%;
-  padding-top: 90px;
+  padding-top: 190px;
   display: flex;
   flex-direction: row;
   gap: 1rem;
@@ -19,7 +19,9 @@ const IntroductionSection = styled.section`
 
   @media only screen and (${deviceQuery.mobileOnlyMax}) {
     flex-direction: column;
-    padding-top: 40px;
+    justify-content: center;
+    padding-top: 0;
+    height: calc(100vh - (var(--nav-height-mobile) + 1) * 1.5px);
   }
 `;
 
@@ -43,13 +45,16 @@ const StyledIntroductionText = styled.div`
 
 const StyledMobileOnlyIntroduction = styled.div`
   display: none;
-  font-size: 1.2em;
+  font-size: 1.1em;
   font-weight: 300;
 
   @media only screen and (${deviceQuery.mobileOnlyMax}) {
-    display: block;
+    display: flex;
+    flex: 0 1 auto;
     text-align: center;
+    justify-content: center;
     margin: 25px 0;
+    width: calc(100% - 10px);
   }
 `;
 
@@ -103,6 +108,8 @@ const StyledH1 = styled.h1`
   }
 
   @media only screen and (${deviceQuery.mobileOnlyMax}) {
+    display: flex;
+    flex: 0 1 auto;
     order: revert;
     text-align: center;
     justify-content: center;
@@ -116,62 +123,73 @@ function Introduction() {
 
   return (
     <IntroductionSection>
-      <StyledIntroductionText>
-        {screenSize.width >= deviceSizeNum.mobileTabletMin &&
-          !hasChatAnimationCompleted && (
-            <IntroChat
-              animationComplete={() => {
-                sethasChatAnimationCompleted(true);
-              }}
-            />
-          )}
-
-        {hasChatAnimationCompleted && (
-          <AnimatePresence>
-            {Object.keys(introSubtitles).map((key, i) => {
-              const delayVal = 0.5 * (i - 1) + 1;
-              return (
-                <StyledSummeryContainer key={i}>
-                  <motion.div
-                    key={`summary${key}`}
-                    animate={{ x: [0, 5, 5], opacity: [0, 1, 1] }}
-                    transition={{
-                      delay: delayVal,
-                      ease: 'anticipate',
-                      duration: 3,
-                      times: [0, 0.6, 1],
-                    }}
-                  >
-                    <StyledSummeryText
-                      className={i === 0 ? 'primary' : 'whisper'}
-                    >
-                      {introSubtitles[i + 1]}
-                    </StyledSummeryText>
-                  </motion.div>
-                </StyledSummeryContainer>
-              );
-            })}
-          </AnimatePresence>
-        )}
-      </StyledIntroductionText>
-
       {screenSize.width >= deviceSizeNum.mobileTabletMin && (
+        <>
+          <StyledIntroductionText>
+            {!hasChatAnimationCompleted && (
+              <IntroChat
+                animationComplete={() => {
+                  sethasChatAnimationCompleted(true);
+                }}
+              />
+            )}
+
+            {hasChatAnimationCompleted && (
+              <AnimatePresence>
+                {Object.keys(introSubtitles).map((key, i) => {
+                  const delayVal = 0.5 * (i - 1) + 1;
+                  return (
+                    <StyledSummeryContainer key={i}>
+                      <motion.div
+                        key={`summary${key}`}
+                        animate={{ x: [0, 5, 5], opacity: [0, 1, 1] }}
+                        transition={{
+                          delay: delayVal,
+                          ease: 'anticipate',
+                          duration: 3,
+                          times: [0, 0.6, 1],
+                        }}
+                      >
+                        <StyledSummeryText
+                          className={i === 0 ? 'primary' : 'whisper'}
+                        >
+                          {introSubtitles[i + 1]}
+                        </StyledSummeryText>
+                      </motion.div>
+                    </StyledSummeryContainer>
+                  );
+                })}
+              </AnimatePresence>
+            )}
+          </StyledIntroductionText>
+
+          <motion.div
+            animate={{ x: [0, 5, 5], opacity: [0, 1, 1] }}
+            style={{ order: '2' }}
+            transition={{
+              delay: 0.4,
+              ease: 'anticipate',
+              duration: 1,
+              times: [0, 0.5, 1],
+            }}
+          >
+            <StyledBR></StyledBR>
+          </motion.div>
+        </>
+      )}
+
+      <StyledMobileOnlyIntroduction>
         <motion.div
           animate={{ x: [0, 5, 5], opacity: [0, 1, 1] }}
-          style={{ order: '2' }}
           transition={{
-            delay: 0.4,
+            delay: 0.1,
             ease: 'anticipate',
             duration: 1,
             times: [0, 0.5, 1],
           }}
         >
-          <StyledBR></StyledBR>
+          Hi. My name is
         </motion.div>
-      )}
-
-      <StyledMobileOnlyIntroduction>
-        Hi. My name is
       </StyledMobileOnlyIntroduction>
 
       <StyledH1>
@@ -189,8 +207,18 @@ function Introduction() {
       </StyledH1>
 
       <StyledMobileOnlyIntroduction>
-        &lt;&gt; I build <span className="primary">delightful</span> Front End
-        experiences. &lt;/&gt;
+        <motion.div
+          animate={{ x: [0, 5, 5], opacity: [0, 1, 1] }}
+          transition={{
+            delay: 0.3,
+            ease: 'anticipate',
+            duration: 1,
+            times: [0, 0.5, 1],
+          }}
+        >
+          &lt;/&gt; I build <span className="primary bold">delightful</span>{' '}
+          Front End experiences. &lt;/&gt;
+        </motion.div>
       </StyledMobileOnlyIntroduction>
     </IntroductionSection>
   );

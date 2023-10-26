@@ -9,22 +9,25 @@ const ListItem_Li = styled.li`
   flex-direction: row;
   width: 100%;
   margin-bottom: 55px;
+  gap: 40px;
 
   @media only screen and (${deviceQuery.tabletMax}) {
     flex-direction: column;
+    gap: 5px;
+    margin-bottom: 75px;
   }
 `;
 
 const ListItem_SectionContaier = styled.div`
   flex: 1;
   flex-wrap: wrap;
-  margin: 0 20px;
 `;
 
 const ListItemLi_H3 = styled.h3`
   width: 100%;
   margin-top: 0px;
   margin-bottom: 7px;
+  font-weight: 500;
 `;
 
 const ListItemLi_p = styled.p`

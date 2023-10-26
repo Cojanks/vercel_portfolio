@@ -10,17 +10,18 @@ const HeaderContainer = styled.div`
   position: relative;
   display: grid;
   grid-template-columns: 12vw 10fr 12vw;
-  grid-template-rows: 140px auto;
+  grid-template-rows: calc(var(--nav-height) * 1px) auto;
   align-items: center;
   background-color: var(--color-background);
   z-index: 5;
+  border-bottom: 1px solid var(--color-grey-800);
 
   @media only screen and (${deviceQuery.mobileTabletMax}) {
     grid-template-columns: 10fr;
-    grid-template-rows: 80px auto;
+    grid-template-rows: calc(var(--nav-height-mobile) * 1px) auto;
     position: sticky;
     top: 0;
-    border-bottom: 1px solid var(--color-grey-700);
+    border-color: var(--color-grey-700);
   }
   @media only screen and (${deviceQuery.mobileOnlyMax}) {
     grid-template-columns: 10fr 2fr;
@@ -68,7 +69,8 @@ const NavUl = styled.ul`
     &.burger-open {
       display: flex;
       flex-direction: column;
-      margin-top: 81px;
+      border-top: 1px solid var(--color-grey-700);
+      margin-top: calc(var(--nav-height-mobile) * 1px);
       position: absolute;
       width: 100%;
       top: 0;
@@ -99,6 +101,7 @@ const NavItem = styled.li`
     background-color: var(--color-background);
     align-items: center;
     width: 100%;
+    border-bottom: 1px solid var(--color-grey-800);
   }
 `;
 
@@ -158,7 +161,7 @@ const MobileNavBackdrop = styled.div`
 
   &.active {
     display: block;
-    height: 100vh;
+    height: calc(100vh - ((var(--nav-height-mobile) + 2) * 1px));
     opacity: 0.8;
   }
 `;
