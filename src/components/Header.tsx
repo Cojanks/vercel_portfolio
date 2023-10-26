@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import { deviceQuery } from '../styles/breakpoints';
 import { dispatch } from '../store/store';
 import { logoClicked } from '../store/slices/easterEggsSlice';
+import Hamburger from './Hamburger';
+import { SyntheticEvent, useState } from 'react';
 
 const HeaderContainer = styled.div`
   position: relative;
@@ -11,6 +13,7 @@ const HeaderContainer = styled.div`
   grid-template-rows: 140px auto;
   align-items: center;
   background-color: var(--color-background);
+  z-index: 5;
 
   @media only screen and (${deviceQuery.mobileTabletMax}) {
     grid-template-columns: 10fr;
@@ -18,6 +21,9 @@ const HeaderContainer = styled.div`
     position: sticky;
     top: 0;
     border-bottom: 1px solid var(--color-grey-700);
+  }
+  @media only screen and (${deviceQuery.mobileOnlyMax}) {
+    grid-template-columns: 10fr 2fr;
   }
 `;
 
@@ -49,9 +55,25 @@ const NavUl = styled.ul`
   text-align: center;
   align-items: center;
   padding: 0;
+  z-index: 3;
 
   @media only screen and (${deviceQuery.mobileTabletMax}) {
     grid-column: 1;
+  }
+
+  @media only screen and (${deviceQuery.mobileOnlyMax}) {
+    grid-column: 1;
+    display: none;
+
+    &.burger-open {
+      display: flex;
+      flex-direction: column;
+      margin-top: 81px;
+      position: absolute;
+      width: 100%;
+      top: 0;
+      background-color: var(--color-background);
+    }
   }
 `;
 
@@ -70,6 +92,13 @@ const NavItem = styled.li`
   @media only screen and (${deviceQuery.mobileOnlyMax}) {
     margin: 0 10px;
     flex: 1 1 auto;
+  }
+
+  ${NavUl}.burger-open & {
+    height: 50px;
+    background-color: var(--color-background);
+    align-items: center;
+    width: 100%;
   }
 `;
 
@@ -104,11 +133,46 @@ const NavItemLink = styled(NavLink)`
       transition: transform 0.3s, opacity 0.2s;
     }
   }
+
+  ${NavUl}.burger-open & {
+    width: 100%;
+    padding: 15px 0;
+  }
+`;
+
+const HamburgerContainer = styled.div`
+  grid-column: 2;
+`;
+
+const MobileNavBackdrop = styled.div`
+  background-color: black;
+  opacity: 0;
+  width: 100%;
+  height: 0;
+  position: absolute;
+  top: 0;
+  margin-top: 81px;
+  transition-timing-function: linear;
+  transition-duration: 0.1s;
+  transition-property: height, opacity;
+
+  &.active {
+    display: block;
+    height: 100vh;
+    opacity: 0.8;
+  }
 `;
 
 function Header() {
+  const [didSomeoneOrderAnOpenSandwich, setDidSomeoneOrderAnOpenSandwich] =
+    useState(false);
+
   function handleLogoClick() {
     dispatch(logoClicked());
+  }
+
+  function toggleMobileMenuState() {
+    setDidSomeoneOrderAnOpenSandwich((state) => !state);
   }
   return (
     <HeaderContainer>
@@ -121,9 +185,19 @@ function Header() {
           C J{' '}
         </LogoText>
       </LogoContainer>
-      <NavUl role="navigation">
+      <NavUl
+        role="navigation"
+        className={didSomeoneOrderAnOpenSandwich ? 'burger-open' : ''}
+      >
         <NavItem>
-          <NavItemLink to={'/'}>Introduction</NavItemLink>
+          <NavItemLink
+            to={'/'}
+            onClick={() => {
+              setDidSomeoneOrderAnOpenSandwich(false);
+            }}
+          >
+            Introduction
+          </NavItemLink>
         </NavItem>
         <NavItem>
           <NavItemLink to="/skills">Skills & Qualifications</NavItemLink>
@@ -135,6 +209,18 @@ function Header() {
           <NavItemLink to="/contact">Contact</NavItemLink>
         </NavItem>
       </NavUl>
+      <HamburgerContainer>
+        <Hamburger
+          handleHamburgerToggle={() => {
+            toggleMobileMenuState();
+          }}
+        />
+      </HamburgerContainer>
+
+      <MobileNavBackdrop
+        className={didSomeoneOrderAnOpenSandwich ? 'active' : ''}
+        onClick={toggleMobileMenuState}
+      />
     </HeaderContainer>
   );
 }

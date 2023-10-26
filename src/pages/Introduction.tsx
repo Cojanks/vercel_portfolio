@@ -43,7 +43,7 @@ const StyledIntroductionText = styled.div`
 
 const StyledMobileOnlyIntroduction = styled.div`
   display: none;
-  font-size: 1.3em;
+  font-size: 1.2em;
   font-weight: 300;
 
   @media only screen and (${deviceQuery.mobileOnlyMax}) {

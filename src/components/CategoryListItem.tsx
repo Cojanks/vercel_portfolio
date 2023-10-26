@@ -46,8 +46,6 @@ function CategoryListItem({
   item: CategoryDBType;
   tags: TagDefinitionsType;
 }) {
-  console.log(item);
-  console.log(tags);
   return (
     <ListItem_Li>
       <ListItem_SectionContaier>
