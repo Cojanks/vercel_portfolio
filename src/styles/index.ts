@@ -17,6 +17,11 @@ export const GlobalStyles = createGlobalStyle`
   --color-tertiary: #ae27fe;
 
 
+  --color-link: #2563eb;
+  --color-link-visited: #a855f7;
+  --color-link-hover: #1e40af;
+
+
 
 
   /* Grey */
@@ -72,6 +77,18 @@ body {
 
 .bold {
   font-weight: 400;
+}
+
+a { 
+  color: var(--color-link);
+
+  &:visited {
+    color: var(--color-link-visited);
+  }
+
+  &:hover{
+    color: var(--color-link-hover);
+  }
 }
 
 
