@@ -10,6 +10,6 @@ export function getNumDaysSinceStart() {
       truncated + 1
     }, days. )`;
   } else {
-    return `( Ive only been working on this for around ${truncated} days. )`;
+    return `( I've only been working on this for around ${truncated} days. )`;
   }
 }

@@ -87,6 +87,16 @@ function Error({ type = 'generic', message }: ErrorType) {
         {type === 'error' && "Let's go back!"}
         {type === 'generic' && 'Back'}
       </BackButton>
+
+      {type === 'under-construction' && (
+        <p>
+          All of this is a resdesign of my{' '}
+          <a href="https://cojanks.github.io/portfolio/">
+            previous portfolio page
+          </a>{' '}
+          so feel free to check that out!
+        </p>
+      )}
     </ErrorContainer>
   );
 }
