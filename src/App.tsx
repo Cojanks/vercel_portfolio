@@ -5,8 +5,7 @@ import { GlobalStyles } from './styles';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import Skills from './pages/Skills';
-import History from './pages/History';
-import Contact from './pages/Contact';
+import Error from './pages/Error';
 
 export const queryClient = new QueryClient({
   defaultOptions: {
@@ -19,6 +18,7 @@ export const queryClient = new QueryClient({
 const router = createBrowserRouter([
   {
     element: <AppLayout />,
+    errorElement: <Error type="wildcard-url" />,
     children: [
       {
         path: '/',
@@ -30,11 +30,11 @@ const router = createBrowserRouter([
       },
       {
         path: '/history',
-        element: <History />,
+        element: <Error type="under-construction" />,
       },
       {
         path: '/contact',
-        element: <Contact />,
+        element: <Error type="under-construction" />,
       },
     ],
   },
