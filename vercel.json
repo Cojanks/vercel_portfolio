@@ -1,8 +1,3 @@
 {
-  "routes": [
-    { "src": "/", "dest": "/" },
-    { "src": "/skills", "dest": "/skills" },
-    { "src": "/history", "dest": "/history" },
-    { "src": "/contact", "dest": "/contact" }
-  ]
+  "routes": [{ "src": "/[^.]+", "dest": "/", "status": 200 }]
 }
