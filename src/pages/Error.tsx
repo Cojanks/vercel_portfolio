@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import DumpsterFire from '../components/DumpsterFire';
 import { useNavigate } from 'react-router-dom';
-import { SyntheticEvent } from 'react';
 
 type ErrorType = {
   type?: 'error' | 'generic' | 'wildcard-url' | 'under-construction';
@@ -60,7 +59,7 @@ function Error({ type = 'generic', message }: ErrorType) {
             the bit with us)
           </p>
           <BackButton
-            onClick={(e: SyntheticEvent) => {
+            onClick={() => {
               navigate('/');
             }}
           >
