@@ -59,13 +59,6 @@ function Error({ type = 'generic', message }: ErrorType) {
             truly love seeing his joy in this, so please join us in commiting to
             the bit with us)
           </p>
-          <BackButton
-            onClick={() => {
-              navigate('/');
-            }}
-          >
-            These aren't the URLs we're looking for. Move along.
-          </BackButton>
         </>
       )}
       {type === 'under-construction' && (

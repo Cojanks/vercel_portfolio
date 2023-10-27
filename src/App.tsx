@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import Skills from './pages/Skills';
 import Error from './pages/Error';
+import Loader from './components/Loader';
 
 export const queryClient = new QueryClient({
   defaultOptions: {

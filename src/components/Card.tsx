@@ -6,14 +6,16 @@ type CardType = {
   borderColor?: string;
   padding?: string;
   boxShadow?: string;
+} & PropsWithChildren;
 
+type CardContainerType = {
   $bgColor?: string;
   $borderColor?: string;
   $padding?: string;
   $boxShadow?: string;
-} & PropsWithChildren;
+};
 
-const CardContainer = styled.div<CardType>`
+const CardContainer = styled.div<CardContainerType>`
   border-radius: var(--border-radius-md);
 
   padding: ${(props) => (props.$padding ? props.$padding : '7px')};

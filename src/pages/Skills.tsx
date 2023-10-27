@@ -5,6 +5,7 @@ import SpinnerOfDoom from '../components/SpinnerOfDoom';
 import Error from './Error';
 import { useSelector } from '../store/store';
 import styled from 'styled-components';
+import Loader from '../components/Loader';
 
 const SectionContainer = styled.div`
   display: block;
@@ -29,7 +30,8 @@ function Skills() {
 
   const tags = useSelector((state) => state.definitions.tags);
 
-  if (categoryLoading || tagLoading) return <SpinnerOfDoom />;
+  if (categoryLoading || tagLoading)
+    return <Loader type="page" numBars={7} size={'chonk'} />;
   if (categoryError || tagError) return <Error />;
 
   return (

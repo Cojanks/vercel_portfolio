@@ -56,7 +56,6 @@ function CategoryListItem({
         <ListItemLi_p>{item.description}</ListItemLi_p>
       </ListItem_SectionContaier>
       <ListItem_SectionContaier>
-        {' '}
         <Card
           borderColor="var(--color-secondary)"
           padding="25px"
