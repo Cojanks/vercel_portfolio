@@ -23,18 +23,23 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <Introduction />,
+        index: true,
+        errorElement: <Error type="generic" />,
       },
       {
         path: '/skills',
         element: <Skills />,
+        errorElement: <Error type="generic" />,
       },
       {
         path: '/history',
         element: <Error type="under-construction" />,
+        errorElement: <Error type="under-construction" />,
       },
       {
         path: '/contact',
         element: <Error type="under-construction" />,
+        errorElement: <Error type="under-construction" />,
       },
     ],
   },
