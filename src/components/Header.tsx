@@ -111,6 +111,10 @@ const NavItemLink = styled(NavLink)`
   text-decoration: none;
   position: relative;
 
+  &:visited {
+    color: var(--color-text);
+  }
+
   &:hover,
   &:active,
   &.active:link,
