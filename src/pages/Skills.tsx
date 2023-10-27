@@ -1,7 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import CategoryList from '../components/CategoryList';
 import { getAPICategories, getAPITags } from '../services/apiDefinitions';
-import SpinnerOfDoom from '../components/SpinnerOfDoom';
 import Error from './Error';
 import { useSelector } from '../store/store';
 import styled from 'styled-components';
