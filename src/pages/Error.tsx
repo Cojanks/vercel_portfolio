@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import DumpsterFire from '../components/DumpsterFire';
 import { useNavigate } from 'react-router-dom';
+import { getNumDaysSinceStart } from '../utility';
 
 type ErrorType = {
   type?: 'error' | 'generic' | 'wildcard-url' | 'under-construction';
@@ -77,8 +78,22 @@ function Error({ type = 'generic', message }: ErrorType) {
             Last we heard him say was something about "
             <span className="primary">supply chain</span>" issues.
           </p>
+          <p className="whisper">{getNumDaysSinceStart()}</p>
         </>
       )}
+
+      <BackButton
+        onClick={() => {
+          navigate('/');
+        }}
+      >
+        {type === 'wildcard-url' &&
+          "These aren't the URLs we're looking for. Move along."}
+        {type === 'under-construction' &&
+          "By clicking here, you agree to the Terms and Conditions stating that you will check out this site's Github repo anyways"}
+        {type === 'error' && "Let's go back!"}
+        {type === 'generic' && 'Back'}
+      </BackButton>
     </ErrorContainer>
   );
 }
