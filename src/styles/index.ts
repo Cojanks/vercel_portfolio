@@ -21,6 +21,9 @@ export const GlobalStyles = createGlobalStyle`
   --color-link-visited: #a855f7;
   --color-link-hover: #1e40af;
 
+  --color-warning:#b59f24;
+  --color-warning-background: #2a2a1d;
+
 
 
 

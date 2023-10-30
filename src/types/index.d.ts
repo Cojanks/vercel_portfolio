@@ -17,7 +17,9 @@ export type CategoryDBType = {
 
 export type DefinitionsType = {
   tags: TagDefinitionsType;
-  errors: string[];
+  errors: {
+    [key: string]: string;
+  };
 };
 
 // Easter Eggs

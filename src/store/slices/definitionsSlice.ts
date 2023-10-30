@@ -3,7 +3,7 @@ import { DefinitionsType, TagDBType } from '../../types';
 
 const initialState: DefinitionsType = {
   tags: {},
-  errors: [],
+  errors: {},
 };
 
 export const definitionsSlice = createSlice({
@@ -20,9 +20,18 @@ export const definitionsSlice = createSlice({
           : action.payload.tags.reduce((accumulator, value) => {
               return { ...accumulator, [value.id]: value.name };
             }, {});
+      state.errors = {};
+    },
+    setError: (
+      state: DefinitionsType,
+      action: PayloadAction<{ type: string; message: string }>
+    ) => {
+      state.errors = state.errors[action.payload.type]
+        ? state.errors
+        : { ...state.errors, [action.payload.type]: action.payload.message };
     },
   },
 });
 
-export const { setTags } = definitionsSlice.actions;
+export const { setTags, setError } = definitionsSlice.actions;
 export default definitionsSlice.reducer;

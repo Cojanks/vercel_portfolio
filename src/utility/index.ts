@@ -4,12 +4,15 @@ export function getNumDaysSinceStart() {
   const daysDiff =
     (today.getTime() - StartDate.getTime()) / (1000 * 60 * 60 * 24);
   const truncated = Math.trunc(daysDiff);
+  const sprintNum = Math.floor(daysDiff / 7);
 
   if (parseInt((daysDiff + '').split('')[2]) >= 5) {
-    return `( I've only been working on this for ${truncated}, almost ${
+    return `I started this ${truncated}, almost ${
       truncated + 1
-    }, days. )`;
+    }, days ago. So, only ${sprintNum} sprint${sprintNum > 1 ? 's' : ''}. `;
   } else {
-    return `( I've only been working on this for around ${truncated} days. )`;
+    return ` I started this around ${truncated} days ago. So, only ${sprintNum} sprint${
+      sprintNum > 1 ? 's' : ''
+    }. `;
   }
 }

@@ -64,7 +64,7 @@ function CategoryListItem({
           <PillCOntainer>
             {item.tag_ids.map((id) => {
               return (
-                <PillTag key={id} type="primary" inverted={false}>
+                <PillTag key={id} type="primary" inverted={true}>
                   {tags[id]}
                 </PillTag>
               );

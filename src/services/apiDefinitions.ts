@@ -1,4 +1,4 @@
-import { setTags } from '../store/slices/definitionsSlice';
+import { setError, setTags } from '../store/slices/definitionsSlice';
 import { dispatch } from '../store/store';
 import supabase from './supabase';
 
@@ -8,7 +8,7 @@ export async function getAPITags() {
     .select();
 
   if (tagError) {
-    console.error(tagError);
+    dispatch(setError({ type: 'tags', message: 'Unable to retrieve Tags' }));
     throw new Error('Tags not found');
   }
 
@@ -23,8 +23,10 @@ export async function getAPICategories() {
     .order('id', { ascending: true });
 
   if (categoriesError) {
-    console.error(categoriesError);
-    throw new Error('Tags not found');
+    dispatch(
+      setError({ type: 'catgories', message: 'Unable to retrieve Categories' })
+    );
+    throw new Error('Categories not found');
   }
 
   return categories;

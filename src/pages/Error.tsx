@@ -2,9 +2,15 @@ import styled from 'styled-components';
 import DumpsterFire from '../components/DumpsterFire';
 import { useNavigate } from 'react-router-dom';
 import { getNumDaysSinceStart } from '../utility';
+import { useSelector } from '../store/store';
 
 type ErrorType = {
-  type?: 'error' | 'generic' | 'wildcard-url' | 'under-construction';
+  type?:
+    | 'error'
+    | 'generic'
+    | 'wildcard-url'
+    | 'under-construction'
+    | 'database';
   message?: string;
 };
 
@@ -34,6 +40,8 @@ const BackButton = styled.button`
 
 function Error({ type = 'generic', message }: ErrorType) {
   const navigate = useNavigate();
+  const errors = useSelector((state) => state.definitions.errors);
+
   return (
     <ErrorContainer
       className={`${type === 'wildcard-url' && 'url'} ${
@@ -48,6 +56,12 @@ function Error({ type = 'generic', message }: ErrorType) {
         fix something.
       </p>
       {type === 'error' && message && <p>It seems, and I quote, {message}</p>}
+      {type === 'database' && (
+        <p>
+          It seems like there was an error retieving{' '}
+          {Object.keys(errors).join(' & ')} from our servers.
+        </p>
+      )}
       {type === 'wildcard-url' && (
         <>
           <p>
@@ -84,7 +98,7 @@ function Error({ type = 'generic', message }: ErrorType) {
           "These aren't the URLs we're looking for. Move along."}
         {type === 'under-construction' &&
           "By clicking here, you agree to the Terms and Conditions stating that you will check out this site's Github repo anyways"}
-        {type === 'error' && "Let's go back!"}
+        {(type === 'error' || type === 'database') && "Let's go back!"}
         {type === 'generic' && 'Back'}
       </BackButton>
 
