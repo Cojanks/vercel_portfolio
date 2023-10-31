@@ -29,7 +29,7 @@ const StyledIntroductionTextItem = styled.div`
 function IntroChat({ animationComplete }: { animationComplete: () => void }) {
   const [scriptIndex, setscriptIndex] = useState<number>(1);
 
-  const durationVal = scriptIndex === 2 || scriptIndex === 4 ? 6 : 3;
+  const durationVal = scriptIndex === 2 || scriptIndex === 4 ? 5 : 2;
 
   function handleCompleteAnimation() {
     if (scriptIndex < Object.keys(chatScript.script).length) {

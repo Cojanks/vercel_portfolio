@@ -5,26 +5,32 @@ import { dispatch } from '../store/store';
 import { logoClicked } from '../store/slices/easterEggsSlice';
 import Hamburger from './Hamburger';
 import { useState } from 'react';
+import SocialIcon from './SocialIcon';
 
 const HeaderContainer = styled.div`
   position: relative;
   display: grid;
-  grid-template-columns: 12vw 10fr 12vw;
+  grid-template-columns: 18vw 64vw 18vw;
   grid-template-rows: calc(var(--nav-height) * 1px) auto;
   align-items: center;
   background-color: var(--color-background);
   z-index: 5;
   border-bottom: 1px solid var(--color-grey-800);
 
+  @media only screen and (${deviceQuery.tabletMax}) {
+    grid-template-columns: 20vw 60vw 20vw;
+  }
+
   @media only screen and (${deviceQuery.mobileTabletMax}) {
-    grid-template-columns: 10fr;
+    grid-template-columns: 4vw 14fr 18vw;
     grid-template-rows: calc(var(--nav-height-mobile) * 1px) auto;
     position: sticky;
     top: 0;
     border-color: var(--color-grey-700);
   }
+
   @media only screen and (${deviceQuery.mobileOnlyMax}) {
-    grid-template-columns: 10fr 2fr;
+    grid-template-columns: 16vw 10fr 26vw;
   }
 `;
 
@@ -34,10 +40,6 @@ const LogoContainer = styled.div`
   font-size: 2em;
   text-align: center;
   cursor: pointer;
-
-  @media only screen and (${deviceQuery.mobileTabletMax}) {
-    display: none;
-  }
 `;
 
 const LogoText = styled.div`
@@ -45,6 +47,10 @@ const LogoText = styled.div`
   border: 3px solid var(--color-text);
   display: inline;
   border-radius: 50%;
+
+  @media only screen and (${deviceQuery.mobileTabletMax}) {
+    display: none;
+  }
 `;
 
 const NavUl = styled.ul`
@@ -58,12 +64,7 @@ const NavUl = styled.ul`
   padding: 0;
   z-index: 3;
 
-  @media only screen and (${deviceQuery.mobileTabletMax}) {
-    grid-column: 1;
-  }
-
   @media only screen and (${deviceQuery.mobileOnlyMax}) {
-    grid-column: 1;
     display: none;
 
     &.burger-open {
@@ -84,7 +85,7 @@ const NavItem = styled.li`
   justify-content: center;
   margin: 0 25px;
   font-weight: 300;
-  font-size: 1.3em;
+  font-size: 1.2em;
 
   @media only screen and (${deviceQuery.mobileTabletMax}) {
     margin: 0 15px;
@@ -97,11 +98,12 @@ const NavItem = styled.li`
   }
 
   ${NavUl}.burger-open & {
-    height: 50px;
+    height: 70px;
     background-color: var(--color-background);
     align-items: center;
-    width: 100%;
+    width: 100vw;
     border-bottom: 1px solid var(--color-grey-800);
+    margin-left: -80px;
   }
 `;
 
@@ -110,6 +112,7 @@ const NavItemLink = styled(NavLink)`
   color: var(--color-text);
   text-decoration: none;
   position: relative;
+  font-size: 1.3em;
 
   &:visited {
     color: var(--color-text);
@@ -143,12 +146,27 @@ const NavItemLink = styled(NavLink)`
 
   ${NavUl}.burger-open & {
     width: 100%;
-    padding: 15px 0;
+    padding: 25px 0;
   }
 `;
 
 const HamburgerContainer = styled.div`
-  grid-column: 2;
+  grid-column: 3;
+`;
+
+const SocialsContainer = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  height: 80px;
+  align-items: center;
+
+  & a {
+    display: flex;
+    width: 100%;
+    text-align: center;
+    height: 100%;
+    align-items: center;
+  }
 `;
 
 const MobileNavBackdrop = styled.div`
@@ -191,6 +209,12 @@ function Header() {
         >
           C J{' '}
         </LogoText>
+        <Hamburger
+          didSomeoneOrderAnOpenSandwich={didSomeoneOrderAnOpenSandwich}
+          handleHamburgerToggle={() => {
+            toggleMobileMenuState();
+          }}
+        />
       </LogoContainer>
       <NavUl
         role="navigation"
@@ -226,24 +250,20 @@ function Header() {
             History
           </NavItemLink>
         </NavItem>
-        <NavItem>
-          <NavItemLink
-            to="/contact"
-            onClick={() => {
-              setDidSomeoneOrderAnOpenSandwich(false);
-            }}
-          >
-            Contact
-          </NavItemLink>
-        </NavItem>
       </NavUl>
+
       <HamburgerContainer>
-        <Hamburger
-          didSomeoneOrderAnOpenSandwich={didSomeoneOrderAnOpenSandwich}
-          handleHamburgerToggle={() => {
-            toggleMobileMenuState();
-          }}
-        />
+        <SocialsContainer>
+          <a href="https://github.com/cojanks">
+            <SocialIcon type="github" />
+          </a>
+          <a href="mailto:cojanks@gmail.com">
+            <SocialIcon type="email" />
+          </a>
+          <a href="https://www.linkedin.com/in/cojanks/">
+            <SocialIcon type="linkedin" />
+          </a>
+        </SocialsContainer>
       </HamburgerContainer>
 
       <MobileNavBackdrop

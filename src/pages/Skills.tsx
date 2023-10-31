@@ -8,6 +8,7 @@ import Loader from '../components/Loader';
 import Alert from '../components/Alert';
 import { getNumDaysSinceStart } from '../utility';
 import { useState } from 'react';
+import Bottom from '../components/Bottom';
 
 const SectionContainer = styled.div`
   display: block;
@@ -67,6 +68,7 @@ function Skills() {
       {categoriesData && (
         <CategoryList categories={categoriesData} tags={tags}></CategoryList>
       )}
+      <Bottom />
     </SectionContainer>
   );
 }

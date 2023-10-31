@@ -3,6 +3,7 @@ import DumpsterFire from '../components/DumpsterFire';
 import { useNavigate } from 'react-router-dom';
 import { getNumDaysSinceStart } from '../utility';
 import { useSelector } from '../store/store';
+import Bottom from '../components/Bottom';
 
 type ErrorType = {
   type?:
@@ -111,6 +112,8 @@ function Error({ type = 'generic', message }: ErrorType) {
           so feel free to check that out!
         </p>
       )}
+
+      <Bottom />
     </ErrorContainer>
   );
 }

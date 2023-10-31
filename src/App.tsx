@@ -36,11 +36,6 @@ const router = createBrowserRouter([
         element: <Error type="under-construction" />,
         errorElement: <Error type="under-construction" />,
       },
-      {
-        path: '/contact',
-        element: <Error type="under-construction" />,
-        errorElement: <Error type="under-construction" />,
-      },
     ],
   },
 ]);

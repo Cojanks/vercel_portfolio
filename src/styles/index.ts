@@ -14,7 +14,7 @@ export const GlobalStyles = createGlobalStyle`
 
   --color-primary: #e92d77;
   --color-secondary: #6f2232;
-  --color-tertiary: #ae27fe;
+  --color-tertiary: #8030e4;
 
 
   --color-link: #2563eb;
@@ -51,7 +51,7 @@ export const GlobalStyles = createGlobalStyle`
   --font-family-secondary: 'Helvetica';
   --font-family-accent: 'Gabarito';
 
-  --nav-height: 140;
+  --nav-height: 120;
   --nav-height-mobile: 80;
 
 }
