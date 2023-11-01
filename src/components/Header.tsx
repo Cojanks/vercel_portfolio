@@ -113,6 +113,9 @@ const NavItemLink = styled(NavLink)`
   text-decoration: none;
   position: relative;
   font-size: 1.3em;
+  -webkit-transition: color 0.1s;
+  -moz-transition: color 0.1s;
+  transition: color 0.1s;
 
   &:visited {
     color: var(--color-text);
@@ -123,7 +126,6 @@ const NavItemLink = styled(NavLink)`
   &.active:link,
   &.active:visited {
     color: var(--color-primary);
-    font-weight: 500;
   }
 
   &.active {
