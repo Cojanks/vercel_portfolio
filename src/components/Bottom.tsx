@@ -7,7 +7,7 @@ const BottomContainer = styled.div`
   align-items: center;
   justify-content: center;
   font-size: 1.1em;
-  margin-top: 30px;
+  margin: 30px 0px;
 
   & svg {
     margin-left: 6px;
