@@ -6,6 +6,7 @@ import useFetchTimelineData from '../services/apiTimeline';
 import Alert from '../components/Alert';
 import { useState } from 'react';
 import { getNumDaysSinceStart } from '../utility';
+import Bottom from '../components/Bottom';
 
 const SectionContainer = styled.div`
   display: block;
@@ -42,6 +43,7 @@ function History() {
       )}
       <h2>Work History</h2>
       {data && <Timeline eventList={data} />}
+      <Bottom />
     </SectionContainer>
   );
 }

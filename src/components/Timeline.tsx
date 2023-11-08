@@ -26,6 +26,20 @@ const TimelineUl = styled.ul`
   letter-spacing: 0.2px;
 `;
 
+const TimelineBlockArrow = styled.span`
+  background-color: var(--color-background);
+  width: 14px;
+  height: 14px;
+  border: 1px solid var(--color-text-secondary);
+  border-right: none;
+  border-top: none;
+  display: block;
+  transform: rotate(45deg);
+  position: absolute;
+  left: -8px;
+  top: 23px;
+`;
+
 const TimelineLi = styled.li`
   list-style: none;
   position: relative;
@@ -47,20 +61,19 @@ const TimelineLi = styled.li`
     left: -39px;
     top: 23px;
   }
-`;
 
-const TimelineBlockArrow = styled.span`
-  background-color: var(--color-background);
-  width: 14px;
-  height: 14px;
-  border: 1px solid var(--color-text-secondary);
-  border-right: none;
-  border-top: none;
-  display: block;
-  transform: rotate(45deg);
-  position: absolute;
-  left: -8px;
-  top: 23px;
+  &:hover {
+    border-color: var(--color-secondary);
+    background-color: var(--color-primary-background);
+
+    &:before {
+      background-color: var(--color-primary);
+    }
+
+    & ${TimelineBlockArrow} {
+      border-color: var(--color-secondary);
+    }
+  }
 `;
 
 const TimelineCompany = styled.div`
