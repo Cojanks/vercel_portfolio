@@ -34,7 +34,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/history',
-        element: <Error type="under-construction" />,
+        element: <History />,
         errorElement: <Error type="under-construction" />,
       },
     ],
