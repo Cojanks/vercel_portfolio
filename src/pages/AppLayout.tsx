@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { Provider } from 'react-redux';
 import { store } from '../store/store.ts';
 import { deviceQuery } from '../styles/breakpoints.ts';
+import SettingsDrawer from '../components/SettingsDrawer.tsx';
 
 const StyledMain = styled.main`
   display: flex;
@@ -20,6 +21,7 @@ function AppLayout() {
     <>
       <Provider store={store}>
         <Header />
+        <SettingsDrawer />
         <StyledMain>
           <Outlet />
         </StyledMain>

@@ -22,6 +22,22 @@ export type DefinitionsType = {
   };
 };
 
+export type TimelineDBType = {
+  id: number;
+  company: string;
+  contentList: string[];
+  endDate: string;
+  endingDetails: string | null;
+  extraEvent: {
+    title: string;
+    details: string;
+  } | null;
+  iconList: string[];
+  position: string;
+  startDate: string;
+  startingDetails: string | null;
+};
+
 // Easter Eggs
 export type EggListType = {
   logoClicked5: boolean;
@@ -36,3 +52,8 @@ export interface EasterEggsStoreType {
   eggList: EggListType;
   eggInteractionsList: InteractionsListType;
 }
+
+// Page Settings
+export type PageSettingsType = {
+  primaryColor: string;
+};

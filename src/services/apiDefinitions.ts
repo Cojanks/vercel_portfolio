@@ -1,8 +1,9 @@
+import { useQuery } from '@tanstack/react-query';
 import { setError, setTags } from '../store/slices/definitionsSlice';
 import { dispatch } from '../store/store';
 import supabase from './supabase';
 
-export async function getAPITags() {
+async function getAPITags() {
   const { data: tags, error: tagError } = await supabase
     .from('skill_tags')
     .select();
@@ -16,7 +17,7 @@ export async function getAPITags() {
   return tags;
 }
 
-export async function getAPICategories() {
+async function getAPICategories() {
   const { data: categories, error: categoriesError } = await supabase
     .from('skill_categories')
     .select()
@@ -30,4 +31,28 @@ export async function getAPICategories() {
   }
 
   return categories;
+}
+
+export default function useGetDefinitions() {
+  const { isLoading: tagLoading, error: tagError } = useQuery({
+    queryKey: ['tags'],
+    queryFn: getAPITags,
+  });
+
+  const {
+    isLoading: categoryLoading,
+    data: categoriesData,
+    error: categoryError,
+  } = useQuery({
+    queryKey: ['categories'],
+    queryFn: () => {
+      return getAPICategories();
+    },
+  });
+
+  return {
+    isLoading: tagLoading || categoryLoading,
+    error: tagError || categoryError,
+    data: categoriesData,
+  };
 }

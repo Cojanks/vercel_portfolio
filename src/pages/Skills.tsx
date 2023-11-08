@@ -1,6 +1,5 @@
-import { useQuery } from '@tanstack/react-query';
 import CategoryList from '../components/CategoryList';
-import { getAPICategories, getAPITags } from '../services/apiDefinitions';
+import useGetDefinitions from '../services/apiDefinitions';
 import Error from './Error';
 import { useSelector } from '../store/store';
 import styled from 'styled-components';
@@ -18,25 +17,12 @@ const SectionContainer = styled.div`
 
 function Skills() {
   const [showAlert, setshowAlert] = useState(true);
-  const {
-    isLoading: categoryLoading,
-    data: categoriesData,
-    error: categoryError,
-  } = useQuery({
-    queryKey: ['categories'],
-    queryFn: getAPICategories,
-  });
 
-  const { isLoading: tagLoading, error: tagError } = useQuery({
-    queryKey: ['tags'],
-    queryFn: getAPITags,
-  });
-
+  const { isLoading, error, data: categoriesData } = useGetDefinitions();
   const tags = useSelector((state) => state.definitions.tags);
 
-  if (categoryLoading || tagLoading)
-    return <Loader type="page" numBars={7} size={'chonk'} />;
-  if (categoryError || tagError) return <Error type="database" />;
+  if (isLoading) return <Loader type="page" numBars={7} size={'chonk'} />;
+  if (error) return <Error type="database" />;
 
   return (
     <SectionContainer>

@@ -7,11 +7,13 @@ import {
 } from 'react-redux';
 import definitionsReducer from './slices/definitionsSlice';
 import easterEggsReducer from './slices/easterEggsSlice';
+import pageSettingsReducer from './slices/pageSettingsSlice';
 
 const store = configureStore({
   reducer: {
     definitions: definitionsReducer,
     easterEggs: easterEggsReducer,
+    pageSettings: pageSettingsReducer,
   },
 });
 

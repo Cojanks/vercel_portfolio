@@ -16,3 +16,17 @@ export function getNumDaysSinceStart() {
     }. `;
   }
 }
+
+export function transformDate(date: string) {
+  if (date.split('.')[1].includes('-')) {
+    return `${date.split('.')[0]} - ???`;
+  } else {
+    const dateTemp = new Date(date);
+    const monthStr = dateTemp.toLocaleString('default', { month: 'long' });
+    return `${date.split('.')[0]} - ${monthStr}`;
+  }
+}
+
+export function setCssVariable(cssVar: string, value: string) {
+  document.documentElement.style.setProperty(cssVar, '#' + value);
+}

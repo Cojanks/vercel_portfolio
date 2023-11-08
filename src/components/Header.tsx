@@ -1,4 +1,3 @@
-import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import { deviceQuery } from '../styles/breakpoints';
 import { dispatch } from '../store/store';
@@ -6,6 +5,7 @@ import { logoClicked } from '../store/slices/easterEggsSlice';
 import Hamburger from './Hamburger';
 import { useState } from 'react';
 import SocialIcon from './SocialIcon';
+import { LinkWithQuery } from './LinkWithQuery';
 
 const HeaderContainer = styled.div`
   position: relative;
@@ -107,7 +107,7 @@ const NavItem = styled.li`
   }
 `;
 
-const NavItemLink = styled(NavLink)`
+const NavItemLink = styled(LinkWithQuery)`
   cursor: pointer;
   color: var(--color-text);
   text-decoration: none;
