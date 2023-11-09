@@ -44,7 +44,7 @@ const TimelineLi = styled.li`
   list-style: none;
   position: relative;
   border: 1px solid var(--color-text-secondary);
-  border-radius: var(--border-radius-sm);
+  border-radius: var(--border-radius-md);
   margin-bottom: 20px;
   padding: 20px;
   background: var(--color-background);
@@ -82,7 +82,9 @@ const TimelineCompany = styled.div`
   margin: 5px 0 15px;
 `;
 
-const TimelineContent = styled.div``;
+const TimelineContent = styled.div`
+  margin-top: 25px;
+`;
 
 const TimelineContentLi = styled.div`
   display: flex;
@@ -105,6 +107,7 @@ const TimelineContentExtra = styled.div`
   border: 1px solid var(--color-grey-700);
   border-radius: var(--border-radius-sm);
   padding: 10px;
+  background-color: var(--color-background);
 
   &:before {
     background-color: var(--color-background);
@@ -147,6 +150,17 @@ const TimelineStartDate = styled.div`
   }
 `;
 
+const TimelinePosition = styled.div`
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  padding: 10px 15px;
+  background-color: var(--color-primary);
+  color: var(--color-background);
+  border-radius: var(--border-radius-sm);
+  font-weight: 500;
+`;
+
 function Timeline({ eventList }: { eventList: TimelineDBType[] }) {
   console.log(eventList);
 
@@ -161,6 +175,7 @@ function Timeline({ eventList }: { eventList: TimelineDBType[] }) {
                 <TimelineBlockArrow />
                 <div>{transformDate(event.endDate)}</div>
                 <TimelineCompany>{event.company}</TimelineCompany>
+                <TimelinePosition>{event.position}</TimelinePosition>
                 <TimelineContent>
                   {event.contentList.map((content, ic) => {
                     let icontype = event.iconList[ic] as IconTypes;
