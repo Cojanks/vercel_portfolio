@@ -162,8 +162,6 @@ const TimelinePosition = styled.div`
 `;
 
 function Timeline({ eventList }: { eventList: TimelineDBType[] }) {
-  console.log(eventList);
-
   return (
     <TimelineContainer>
       <TimelineVisualLine />
@@ -178,7 +176,7 @@ function Timeline({ eventList }: { eventList: TimelineDBType[] }) {
                 <TimelinePosition>{event.position}</TimelinePosition>
                 <TimelineContent>
                   {event.contentList.map((content, ic) => {
-                    let icontype = event.iconList[ic] as IconTypes;
+                    const icontype = event.iconList[ic] as IconTypes;
                     return (
                       <TimelineContentLi key={ic}>
                         <SVGIcon

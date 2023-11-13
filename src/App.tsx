@@ -7,6 +7,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import Skills from './pages/Skills';
 import Error from './pages/Error';
 import History from './pages/History';
+import RnD from './pages/RnD';
 
 export const queryClient = new QueryClient({
   defaultOptions: {
@@ -36,6 +37,15 @@ const router = createBrowserRouter([
         path: '/history',
         element: <History />,
         errorElement: <Error type="under-construction" />,
+      },
+      {
+        path: '/rnd',
+        element: <RnD />,
+        errorElement: <Error type="under-construction" />,
+      },
+      {
+        path: '/*',
+        element: <Error type="wildcard-url" />,
       },
     ],
   },

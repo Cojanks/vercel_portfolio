@@ -61,7 +61,8 @@ function Error({ type = 'generic', message }: ErrorType) {
       {type === 'wildcard-url' && (
         <>
           <p>
-            He says: <br /> "These arent the URLs you're looking for."
+            The old man in the landspeeder looks at you, waves his hand, and
+            says: <br /> "These arent the URLs you're looking for."
           </p>
         </>
       )}
