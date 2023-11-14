@@ -30,3 +30,11 @@ export function transformDate(date: string) {
 export function setCssVariable(cssVar: string, value: string) {
   document.documentElement.style.setProperty(cssVar, '#' + value);
 }
+
+export function hexToRGB(hex: string, alpha = '1') {
+  const r = parseInt(hex.slice(1, 3), 16);
+  const g = parseInt(hex.slice(3, 5), 16);
+  const b = parseInt(hex.slice(5, 7), 16);
+
+  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+}
