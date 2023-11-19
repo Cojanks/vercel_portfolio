@@ -22,6 +22,17 @@ export type DefinitionsType = {
   };
 };
 
+export type SocialsType = {
+  [key: number]: {
+    [key: number]: number;
+  };
+};
+
+export type CategoryListSocialsType = {
+  isLoading: boolean;
+  tagSocialData: SocialsType;
+};
+
 export type TimelineDBType = {
   id: number;
   company: string;

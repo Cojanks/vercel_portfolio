@@ -1,11 +1,13 @@
-import { CategoryDBType, TagDefinitionsType } from '../types';
+import { TagDefinitionsType } from '../types';
 import styled from 'styled-components';
 import CategoryListItem from './CategoryListItem';
+import { Database } from '../services/supabase';
 
 type CategoryListType = {
-  categories: CategoryDBType[];
+  categories: Database['public']['Tables']['skill_categories']['Row'][];
   tags: TagDefinitionsType;
 };
+// TODO: remove optional above
 
 const CategoryListContainer = styled.div`
   display: flex;
@@ -20,9 +22,6 @@ const CategoryListul = styled.ul`
   padding-left: 0;
 `;
 
-// Category + desc
-// Tags
-// On tag select, open accordion with examples
 function CategoryList({ categories, tags }: CategoryListType) {
   return (
     <CategoryListContainer>

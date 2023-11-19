@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import { TimelineDBType } from '../types';
 import { IconTypes, SVGIcon } from './Icons';
 import { transformDate } from '../utility';
+import { Database } from '../services/supabase';
 
 const TimelineContainer = styled.div`
   position: relative;
@@ -161,7 +161,11 @@ const TimelinePosition = styled.div`
   font-weight: 500;
 `;
 
-function Timeline({ eventList }: { eventList: TimelineDBType[] }) {
+function Timeline({
+  eventList,
+}: {
+  eventList: Database['public']['Tables']['work_timeline']['Row'][];
+}) {
   return (
     <TimelineContainer>
       <TimelineVisualLine />
@@ -171,12 +175,12 @@ function Timeline({ eventList }: { eventList: TimelineDBType[] }) {
             return (
               <TimelineLi key={i}>
                 <TimelineBlockArrow />
-                <div>{transformDate(event.endDate)}</div>
+                <div>{transformDate(event.endDate!)}</div>
                 <TimelineCompany>{event.company}</TimelineCompany>
                 <TimelinePosition>{event.position}</TimelinePosition>
                 <TimelineContent>
-                  {event.contentList.map((content, ic) => {
-                    const icontype = event.iconList[ic] as IconTypes;
+                  {event.contentList!.map((content, ic) => {
+                    const icontype = event.iconList![ic] as IconTypes;
                     return (
                       <TimelineContentLi key={ic}>
                         <SVGIcon
@@ -199,7 +203,7 @@ function Timeline({ eventList }: { eventList: TimelineDBType[] }) {
 
                 <TimelineStartDate>
                   <TimelineBlockArrow />
-                  {transformDate(event.startDate)}
+                  {transformDate(event.startDate!)}
 
                   {event.startingDetails && <div>{event.startingDetails}</div>}
                 </TimelineStartDate>
