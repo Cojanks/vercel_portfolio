@@ -1,5 +1,7 @@
 import { PropsWithChildren, useState } from 'react';
 import styled from 'styled-components';
+import { dispatch } from '../store/store';
+import { updateTagSocialByTagId } from '../store/slices/socialsSlice';
 
 type CustomizationType = {
   $pillType: string;
@@ -14,7 +16,7 @@ const PillTagContainer = styled.div<CustomizationType>`
       ? `var(--color-primary)`
       : `var(--color-secondary)`};
 
-  padding: 8px 14px;
+  padding: 8px 14px 10px;
   display: inline-block;
   position: relative;
   border-radius: var(--border-radius-xlg);
@@ -68,6 +70,8 @@ const SocialActionContainer = styled.div<CustomizationType>`
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
+  right: -7px;
+  z-index: 2;
 
   ${SocialButton}:first-child {
     border-top-right-radius: 0;
@@ -79,14 +83,32 @@ const SocialActionContainer = styled.div<CustomizationType>`
     border-bottom-left-radius: 0;
   }
 `;
+const SocialCountsContainer = styled.div`
+  position: absolute;
+  right: -7px;
+  bottom: -13px;
+  display: flex;
+  flex-direction: row;
+`;
+const SocialCount = styled.div`
+  background-color: var(--color-background);
+  border: 1px solid var(--color-primary);
+  border-radius: var(--border-radius-xlg);
+  padding: 4px 6px;
+  font-size: 12px;
+  color: var(--color-primary);
+  white-space: nowrap;
+`;
 
 type PillTagType = {
   type?: 'primary' | 'secondary';
+  tagId?: number;
   inverted?: boolean;
   color?: string;
   socialContent1?: string;
   socialContent2?: string;
-  handleSocialClick: (buttonIndex: number) => void;
+  socialVals: { [key: number]: number };
+  handleSocialClick: (socialInd: number) => void;
   handlePillClick: () => void;
 } & PropsWithChildren;
 
@@ -96,11 +118,14 @@ function SocialPill({
   type = 'primary',
   socialContent1 = '👍',
   socialContent2 = '🔥',
-  handleSocialClick,
   handlePillClick,
+  tagId = 10000,
+  handleSocialClick,
+  socialVals,
   color,
 }: PillTagType) {
   const [showSocialActions, setshowSocialActions] = useState(false);
+  console.log('tagId: ' + tagId);
 
   return (
     <PillTagContainer
@@ -118,12 +143,34 @@ function SocialPill({
       }}
     >
       <div>{children}</div>
+      {!showSocialActions && (
+        <SocialCountsContainer>
+          {socialVals[1] > 0 && (
+            <SocialCount>
+              {socialContent1} {socialVals[1]}
+            </SocialCount>
+          )}
+
+          {socialVals[2] > 0 && (
+            <SocialCount>
+              {socialContent2} {socialVals[2]}
+            </SocialCount>
+          )}
+        </SocialCountsContainer>
+      )}
+
       {showSocialActions && (
         <SocialActionContainer $pillType={type} $color={color ? color : ''}>
           <SocialButton
             onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
               e.stopPropagation();
               handleSocialClick(1);
+              dispatch(
+                updateTagSocialByTagId({
+                  tagId: tagId,
+                  socialCount: { ...socialVals, 1: socialVals[1] + 1 },
+                })
+              );
             }}
           >
             {socialContent1}
@@ -131,7 +178,12 @@ function SocialPill({
           <SocialButton
             onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
               e.stopPropagation();
-              handleSocialClick(2);
+              dispatch(
+                updateTagSocialByTagId({
+                  tagId: tagId,
+                  socialCount: { ...socialVals, 2: socialVals[2] + 1 },
+                })
+              );
             }}
           >
             {socialContent2}

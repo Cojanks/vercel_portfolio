@@ -1,8 +1,10 @@
 import styled from 'styled-components';
-import { CategoryDBType, TagDefinitionsType } from '../types';
+import { TagDefinitionsType } from '../types';
 import Card from './Card';
-import PillTag from './PillTag';
 import { deviceQuery } from '../styles/breakpoints';
+import SocialPill from './SocialPill';
+import { Database } from '../services/supabase';
+import { useSelector } from '../store/store';
 
 const ListItem_Li = styled.li`
   display: flex;
@@ -35,9 +37,10 @@ const ListItemLi_p = styled.p`
   color: var(--color-text-secondary);
 `;
 
-const PillCOntainer = styled.div`
+const PillContainer = styled.div`
   display: flex;
-  gap: 7px;
+  gap: 15px;
+  row-gap: 20px;
   justify-content: flex-start;
   flex-wrap: wrap;
 `;
@@ -46,9 +49,21 @@ function CategoryListItem({
   item,
   tags,
 }: {
-  item: CategoryDBType;
+  item: Database['public']['Tables']['skill_categories']['Row'];
   tags: TagDefinitionsType;
 }) {
+  const tagSocials = useSelector((state) => state.tagSocials.tagSocialData);
+  console.log(tagSocials);
+
+  function getTagSocialData(id: number) {
+    return (
+      useSelector((state) => state.tagSocials.tagSocialData[id]) || {
+        1: 0,
+        2: 0,
+      }
+    );
+  }
+
   return (
     <ListItem_Li>
       <ListItem_SectionContaier>
@@ -61,15 +76,26 @@ function CategoryListItem({
           padding="25px"
           boxShadow="0px 0 10px var(--color-secondary)"
         >
-          <PillCOntainer>
-            {item.tag_ids.map((id) => {
-              return (
-                <PillTag key={id} type="primary" inverted={true}>
-                  {tags[id]}
-                </PillTag>
-              );
-            })}
-          </PillCOntainer>
+          <PillContainer>
+            {item.tag_ids &&
+              item.tag_ids.map((id) => {
+                return (
+                  <SocialPill
+                    key={id}
+                    tagId={id}
+                    handleSocialClick={(socialInd) => {
+                      console.log('Social clicked: ' + socialInd);
+                    }}
+                    handlePillClick={() => {
+                      console.log('pill clicked');
+                    }}
+                    socialVals={getTagSocialData(id)}
+                  >
+                    {tags[id]}
+                  </SocialPill>
+                );
+              })}
+          </PillContainer>
         </Card>
       </ListItem_SectionContaier>
     </ListItem_Li>

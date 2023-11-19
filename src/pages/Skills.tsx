@@ -1,5 +1,5 @@
 import CategoryList from '../components/CategoryList';
-import useGetDefinitions from '../services/apiDefinitions';
+import useGetSkillsData from '../services/apiDefinitions';
 import Error from './Error';
 import { useSelector } from '../store/store';
 import styled from 'styled-components';
@@ -9,7 +9,7 @@ import { getNumDaysSinceStart } from '../utility';
 import { useState } from 'react';
 import Bottom from '../components/Bottom';
 
-const SectionContainer = styled.div`
+const SectionContainer = styled.section`
   display: block;
   width: 100%;
   margin: 15px 25px 0px;
@@ -18,7 +18,8 @@ const SectionContainer = styled.div`
 function Skills() {
   const [showAlert, setshowAlert] = useState(true);
 
-  const { isLoading, error, data: categoriesData } = useGetDefinitions();
+  const { isLoading, error, data: categoriesData } = useGetSkillsData();
+
   const tags = useSelector((state) => state.definitions.tags);
 
   if (isLoading) return <Loader type="page" numBars={7} size={'chonk'} />;

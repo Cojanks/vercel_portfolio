@@ -2,6 +2,8 @@ import { useQuery } from '@tanstack/react-query';
 import { setError, setTags } from '../store/slices/definitionsSlice';
 import { dispatch } from '../store/store';
 import supabase from './supabase';
+import { setTagSocials } from '../store/slices/socialsSlice';
+import { CategoryListSocialsType } from '../types';
 
 async function getAPITags() {
   const { data: tags, error: tagError } = await supabase
@@ -15,6 +17,34 @@ async function getAPITags() {
 
   dispatch(setTags({ tags: tags }));
   return tags;
+}
+
+async function getTagSocialsData() {
+  const { data, error } = await supabase.rpc('get_tag_social_counts').select();
+
+  if (error instanceof Error) {
+    console.log(error.message);
+  }
+
+  if (!data) {
+    throw new Error(`No data in social_interactions table`);
+  }
+
+  const convertedData: CategoryListSocialsType = {
+    isLoading: false,
+    tagSocialData: {},
+  };
+
+  for (const tag of data) {
+    convertedData.tagSocialData[tag.tag_id] = {
+      1: tag.social_1,
+      2: tag.social_2,
+    };
+  }
+
+  dispatch(setTagSocials({ socials: convertedData.tagSocialData }));
+
+  return convertedData;
 }
 
 async function getAPICategories() {
@@ -33,12 +63,7 @@ async function getAPICategories() {
   return categories;
 }
 
-export default function useGetDefinitions() {
-  const { isLoading: tagLoading, error: tagError } = useQuery({
-    queryKey: ['tags'],
-    queryFn: getAPITags,
-  });
-
+export default function useGetSkillsData() {
   const {
     isLoading: categoryLoading,
     data: categoriesData,
@@ -50,9 +75,21 @@ export default function useGetDefinitions() {
     },
   });
 
+  const { isLoading: tagLoading, error: tagError } = useQuery({
+    queryKey: ['tags'],
+    queryFn: getAPITags,
+  });
+
+  const { error: socialsError } = useQuery({
+    queryKey: ['socials'],
+    queryFn: () => {
+      return getTagSocialsData();
+    },
+  });
+
   return {
     isLoading: tagLoading || categoryLoading,
-    error: tagError || categoryError,
+    error: tagError || categoryError || socialsError,
     data: categoriesData,
   };
 }

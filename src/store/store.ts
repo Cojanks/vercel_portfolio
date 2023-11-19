@@ -8,12 +8,14 @@ import {
 import definitionsReducer from './slices/definitionsSlice';
 import easterEggsReducer from './slices/easterEggsSlice';
 import pageSettingsReducer from './slices/pageSettingsSlice';
+import tagSocialsReducer from './slices/socialsSlice';
 
 const store = configureStore({
   reducer: {
     definitions: definitionsReducer,
     easterEggs: easterEggsReducer,
     pageSettings: pageSettingsReducer,
+    tagSocials: tagSocialsReducer,
   },
 });
 
