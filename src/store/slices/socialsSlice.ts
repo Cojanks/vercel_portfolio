@@ -14,7 +14,6 @@ export const tagSocialsSlice = createSlice({
       state: CategoryListSocialsType,
       action: PayloadAction<{ socials: SocialsType }>
     ) => {
-      console.log('setTagSocials');
       state.isLoading = false;
       state.tagSocialData = action.payload.socials;
     },
@@ -25,9 +24,6 @@ export const tagSocialsSlice = createSlice({
         socialCount: { [key: number]: number };
       }>
     ) => {
-      console.log('incrementTagSocialByTagIdAndSocialId');
-      console.log(action.payload);
-
       state.tagSocialData = {
         ...state.tagSocialData,
         [action.payload.tagId]: action.payload.socialCount,

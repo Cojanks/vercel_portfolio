@@ -1,6 +1,6 @@
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { setError, setTags } from '../store/slices/definitionsSlice';
-import { dispatch } from '../store/store';
+import { dispatch, useSelector } from '../store/store';
 import supabase from './supabase';
 import { setTagSocials } from '../store/slices/socialsSlice';
 import { CategoryListSocialsType } from '../types';
@@ -19,7 +19,7 @@ async function getAPITags() {
   return tags;
 }
 
-async function getTagSocialsData() {
+async function getAPISocialInteractions() {
   const { data, error } = await supabase.rpc('get_tag_social_counts').select();
 
   if (error instanceof Error) {
@@ -83,7 +83,7 @@ export default function useGetSkillsData() {
   const { error: socialsError } = useQuery({
     queryKey: ['socials'],
     queryFn: () => {
-      return getTagSocialsData();
+      return getAPISocialInteractions();
     },
   });
 
@@ -92,4 +92,19 @@ export default function useGetSkillsData() {
     error: tagError || categoryError || socialsError,
     data: categoriesData,
   };
+}
+
+export async function addAPISocialInteraction({
+  tagId,
+  socialAction,
+}: {
+  tagId: number;
+  socialAction: number;
+}) {
+  const { data, error } = await supabase
+    .from('social_interactions')
+    .insert({ tag_id: tagId, social_action: socialAction })
+    .select();
+
+  return { data, error };
 }

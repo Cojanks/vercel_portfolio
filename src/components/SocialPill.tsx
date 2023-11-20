@@ -1,7 +1,9 @@
 import { PropsWithChildren, useState } from 'react';
 import styled from 'styled-components';
-import { dispatch } from '../store/store';
+import { dispatch, useSelector } from '../store/store';
 import { updateTagSocialByTagId } from '../store/slices/socialsSlice';
+import { addAPISocialInteraction } from '../services/apiDefinitions';
+import { useMutation } from '@tanstack/react-query';
 
 type CustomizationType = {
   $pillType: string;
@@ -109,7 +111,7 @@ type PillTagType = {
   socialContent2?: string;
   socialVals: { [key: number]: number };
   handleSocialClick?: (socialInd: number) => void;
-  handlePillClick: () => void;
+  handlePillClick?: () => void;
 } & PropsWithChildren;
 
 function SocialPill({
@@ -124,8 +126,10 @@ function SocialPill({
   color,
 }: PillTagType) {
   const [showSocialActions, setshowSocialActions] = useState(false);
-  console.log('tagId: ' + tagId);
-
+  const mutation = useMutation({
+    mutationFn: addAPISocialInteraction,
+  });
+  const isAdmin = useSelector((state) => state.pageSettings.isAdmin);
   return (
     <PillTagContainer
       $pillType={type}
@@ -138,7 +142,7 @@ function SocialPill({
         setshowSocialActions(false);
       }}
       onClick={() => {
-        handlePillClick();
+        handlePillClick && handlePillClick();
       }}
     >
       <div>{children}</div>
@@ -169,6 +173,7 @@ function SocialPill({
                   socialCount: { ...socialVals, 1: socialVals[1] + 1 },
                 })
               );
+              isAdmin && mutation.mutate({ tagId: tagId, socialAction: 1 });
             }}
           >
             {socialContent1}
@@ -182,6 +187,7 @@ function SocialPill({
                   socialCount: { ...socialVals, 2: socialVals[2] + 1 },
                 })
               );
+              isAdmin && mutation.mutate({ tagId: tagId, socialAction: 2 });
             }}
           >
             {socialContent2}

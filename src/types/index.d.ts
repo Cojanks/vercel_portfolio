@@ -67,4 +67,5 @@ export interface EasterEggsStoreType {
 // Page Settings
 export type PageSettingsType = {
   primaryColor: string;
+  isAdmin: boolean;
 };

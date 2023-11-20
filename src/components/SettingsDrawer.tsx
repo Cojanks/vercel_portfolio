@@ -1,6 +1,9 @@
 import styled from 'styled-components';
 import { dispatch, useSelector } from '../store/store';
-import { setPrimaryCSSVariable } from '../store/slices/pageSettingsSlice';
+import {
+  setAdmin,
+  setPrimaryCSSVariable,
+} from '../store/slices/pageSettingsSlice';
 import { getParamsof } from '../services/queryParams';
 
 const StyledDrawerContainer = styled.div`
@@ -9,8 +12,9 @@ const StyledDrawerContainer = styled.div`
 
 function SettingsDrawer() {
   const primaryColor = useSelector((state) => state.pageSettings.primaryColor);
+
   if (getParamsof('primary') && primaryColor !== getParamsof('primary')) {
-    console.log('yes');
+    console.log('Primay Color setting active');
     document.documentElement.style.setProperty(
       '--color-primary',
       '#' + getParamsof('primary')
@@ -20,6 +24,10 @@ function SettingsDrawer() {
         cssVal: getParamsof('primary')!,
       })
     );
+  }
+
+  if (getParamsof('admin')) {
+    dispatch(setAdmin());
   }
 
   return <StyledDrawerContainer>SettingsDrawer</StyledDrawerContainer>;

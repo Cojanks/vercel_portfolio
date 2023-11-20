@@ -80,9 +80,6 @@ function CategoryListItem({
                   <SocialPill
                     key={id}
                     tagId={id}
-                    handlePillClick={() => {
-                      console.log('pill clicked');
-                    }}
                     socialVals={getTagSocialData(id)}
                   >
                     {tags[id]}
