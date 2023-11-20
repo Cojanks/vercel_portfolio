@@ -6,7 +6,6 @@ type UseTooltipProps = {
   tooltipLocation: 'top' | 'bottom';
   offset: number;
   delay?: number;
-  show?: boolean;
 };
 
 type Position = {
@@ -23,7 +22,6 @@ export function useTooltip({
   tooltipLocation,
   offset,
   delay = 800,
-  show,
 }: UseTooltipProps) {
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const [position, setposition] = useState<Position>({});
