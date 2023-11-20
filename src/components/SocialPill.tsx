@@ -108,7 +108,7 @@ type PillTagType = {
   socialContent1?: string;
   socialContent2?: string;
   socialVals: { [key: number]: number };
-  handleSocialClick: (socialInd: number) => void;
+  handleSocialClick?: (socialInd: number) => void;
   handlePillClick: () => void;
 } & PropsWithChildren;
 
@@ -120,7 +120,6 @@ function SocialPill({
   socialContent2 = '🔥',
   handlePillClick,
   tagId = 10000,
-  handleSocialClick,
   socialVals,
   color,
 }: PillTagType) {
@@ -164,7 +163,6 @@ function SocialPill({
           <SocialButton
             onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
               e.stopPropagation();
-              handleSocialClick(1);
               dispatch(
                 updateTagSocialByTagId({
                   tagId: tagId,

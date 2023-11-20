@@ -52,9 +52,6 @@ function CategoryListItem({
   item: Database['public']['Tables']['skill_categories']['Row'];
   tags: TagDefinitionsType;
 }) {
-  const tagSocials = useSelector((state) => state.tagSocials.tagSocialData);
-  console.log(tagSocials);
-
   function getTagSocialData(id: number) {
     return (
       useSelector((state) => state.tagSocials.tagSocialData[id]) || {
@@ -83,9 +80,6 @@ function CategoryListItem({
                   <SocialPill
                     key={id}
                     tagId={id}
-                    handleSocialClick={(socialInd) => {
-                      console.log('Social clicked: ' + socialInd);
-                    }}
                     handlePillClick={() => {
                       console.log('pill clicked');
                     }}
