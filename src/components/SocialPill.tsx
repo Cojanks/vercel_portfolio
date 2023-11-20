@@ -4,6 +4,7 @@ import { dispatch, useSelector } from '../store/store';
 import { updateTagSocialByTagId } from '../store/slices/socialsSlice';
 import { addAPISocialInteraction } from '../services/apiDefinitions';
 import { useMutation } from '@tanstack/react-query';
+import { queryClient } from '../App';
 
 type CustomizationType = {
   $pillType: string;
@@ -107,8 +108,7 @@ type PillTagType = {
   tagId?: number;
   inverted?: boolean;
   color?: string;
-  socialContent1?: string;
-  socialContent2?: string;
+  socialContentArr?: string[];
   socialVals: { [key: number]: number };
   handleSocialClick?: (socialInd: number) => void;
   handlePillClick?: () => void;
@@ -118,8 +118,7 @@ function SocialPill({
   children,
   inverted = false,
   type = 'primary',
-  socialContent1 = '👍',
-  socialContent2 = '🔥',
+  socialContentArr = ['👍', '🔥'],
   handlePillClick,
   tagId = 10000,
   socialVals,
@@ -128,8 +127,12 @@ function SocialPill({
   const [showSocialActions, setshowSocialActions] = useState(false);
   const mutation = useMutation({
     mutationFn: addAPISocialInteraction,
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: ['socials'] });
+    },
   });
   const isAdmin = useSelector((state) => state.pageSettings.isAdmin);
+
   return (
     <PillTagContainer
       $pillType={type}
@@ -150,13 +153,13 @@ function SocialPill({
         <SocialCountsContainer>
           {socialVals[1] > 0 && (
             <SocialCount>
-              {socialContent1} {socialVals[1]}
+              {socialContentArr[0]} {socialVals[1]}
             </SocialCount>
           )}
 
           {socialVals[2] > 0 && (
             <SocialCount>
-              {socialContent2} {socialVals[2]}
+              {socialContentArr[1]} {socialVals[2]}
             </SocialCount>
           )}
         </SocialCountsContainer>
@@ -167,30 +170,32 @@ function SocialPill({
           <SocialButton
             onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
               e.stopPropagation();
-              dispatch(
-                updateTagSocialByTagId({
-                  tagId: tagId,
-                  socialCount: { ...socialVals, 1: socialVals[1] + 1 },
-                })
-              );
+              !isAdmin &&
+                dispatch(
+                  updateTagSocialByTagId({
+                    tagId: tagId,
+                    socialCount: { ...socialVals, 1: socialVals[1] + 1 },
+                  })
+                );
               isAdmin && mutation.mutate({ tagId: tagId, socialAction: 1 });
             }}
           >
-            {socialContent1}
+            {socialContentArr[0]}
           </SocialButton>
           <SocialButton
             onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
               e.stopPropagation();
-              dispatch(
-                updateTagSocialByTagId({
-                  tagId: tagId,
-                  socialCount: { ...socialVals, 2: socialVals[2] + 1 },
-                })
-              );
+              !isAdmin &&
+                dispatch(
+                  updateTagSocialByTagId({
+                    tagId: tagId,
+                    socialCount: { ...socialVals, 2: socialVals[2] + 1 },
+                  })
+                );
               isAdmin && mutation.mutate({ tagId: tagId, socialAction: 2 });
             }}
           >
-            {socialContent2}
+            {socialContentArr[1]}
           </SocialButton>
         </SocialActionContainer>
       )}

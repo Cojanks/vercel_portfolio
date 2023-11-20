@@ -61,6 +61,13 @@ function CategoryListItem({
     );
   }
 
+  function getCustomSocialContent(id: number) {
+    if (id === 30) return ['🐶', '🥺'];
+    if (id === 27) return ['📚', '📖'];
+    if (id === 15) return ['✍️', '✅'];
+    return ['👍', '🔥'];
+  }
+
   return (
     <ListItem_Li>
       <ListItem_SectionContaier>
@@ -76,11 +83,13 @@ function CategoryListItem({
           <PillContainer>
             {item.tag_ids &&
               item.tag_ids.map((id) => {
+                console.log(getCustomSocialContent(id));
                 return (
                   <SocialPill
                     key={id}
                     tagId={id}
                     socialVals={getTagSocialData(id)}
+                    socialContentArr={getCustomSocialContent(id)}
                   >
                     {tags[id]}
                   </SocialPill>

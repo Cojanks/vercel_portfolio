@@ -1,6 +1,6 @@
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { setError, setTags } from '../store/slices/definitionsSlice';
-import { dispatch, useSelector } from '../store/store';
+import { dispatch } from '../store/store';
 import supabase from './supabase';
 import { setTagSocials } from '../store/slices/socialsSlice';
 import { CategoryListSocialsType } from '../types';
@@ -101,6 +101,7 @@ export async function addAPISocialInteraction({
   tagId: number;
   socialAction: number;
 }) {
+  console.log('Adding to social_interactions table');
   const { data, error } = await supabase
     .from('social_interactions')
     .insert({ tag_id: tagId, social_action: socialAction })
