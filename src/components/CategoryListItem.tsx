@@ -83,7 +83,6 @@ function CategoryListItem({
           <PillContainer>
             {item.tag_ids &&
               item.tag_ids.map((id) => {
-                console.log(getCustomSocialContent(id));
                 return (
                   <SocialPill
                     key={id}
