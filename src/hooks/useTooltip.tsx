@@ -5,6 +5,8 @@ type UseTooltipProps = {
   tooltipElRef: RefObject<HTMLDivElement>;
   tooltipLocation: 'top' | 'bottom';
   offset: number;
+  delay?: number;
+  show?: boolean;
 };
 
 type Position = {
@@ -20,6 +22,8 @@ export function useTooltip({
   tooltipElRef,
   tooltipLocation,
   offset,
+  delay = 800,
+  show,
 }: UseTooltipProps) {
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const [position, setposition] = useState<Position>({});
@@ -50,7 +54,10 @@ export function useTooltip({
     }
 
     if (!isVisible) {
-      setposition({});
+      const timer = setTimeout(() => {
+        setposition({});
+      }, delay);
+      return () => clearTimeout(timer);
     }
   }, [isVisible, targetElRef, tooltipElRef]);
 

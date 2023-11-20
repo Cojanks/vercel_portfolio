@@ -15,7 +15,7 @@ const TooltipContainer = styled.div<TooltipContainerType>`
   padding: 10px 13px;
   background-color: var(--color-secondary);
   opacity: 0;
-  transition: opacity ease-in 0.3s;
+  transition: opacity 0.3s ease-in;
   border-radius: var(--border-radius-sm);
 
   &.visible {
