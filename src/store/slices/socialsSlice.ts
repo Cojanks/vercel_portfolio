@@ -7,10 +7,10 @@ const initialState: CategoryListSocialsType = {
 };
 
 export const tagSocialsSlice = createSlice({
-  name: 'TagSocials',
+  name: 'tagSocials',
   initialState,
   reducers: {
-    setTagSocials: (
+    settagSocials: (
       state: CategoryListSocialsType,
       action: PayloadAction<{ socials: SocialsType }>
     ) => {
@@ -32,6 +32,6 @@ export const tagSocialsSlice = createSlice({
   },
 });
 
-export const { setTagSocials, updateTagSocialByTagId } =
+export const { settagSocials, updateTagSocialByTagId } =
   tagSocialsSlice.actions;
 export default tagSocialsSlice.reducer;

@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { setError, setTags } from '../store/slices/definitionsSlice';
 import { dispatch } from '../store/store';
 import supabase from './supabase';
-import { setTagSocials } from '../store/slices/socialsSlice';
+import { settagSocials } from '../store/slices/socialsSlice';
 import { CategoryListSocialsType } from '../types';
 
 async function getAPITags() {
@@ -42,7 +42,9 @@ async function getAPISocialInteractions() {
     };
   }
 
-  dispatch(setTagSocials({ socials: convertedData.tagSocialData }));
+  setTimeout(() => {
+    dispatch(settagSocials({ socials: convertedData.tagSocialData }));
+  }, 2000);
 
   return convertedData;
 }

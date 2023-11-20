@@ -5,6 +5,7 @@ import { updateTagSocialByTagId } from '../store/slices/socialsSlice';
 import { addAPISocialInteraction } from '../services/apiDefinitions';
 import { useMutation } from '@tanstack/react-query';
 import { queryClient } from '../App';
+import { SVGIcon } from './Icons';
 
 type CustomizationType = {
   $pillType: string;
@@ -132,6 +133,7 @@ function SocialPill({
     },
   });
   const isAdmin = useSelector((state) => state.pageSettings.isAdmin);
+  const isLoading = useSelector((state) => state.tagSocials.isLoading);
 
   return (
     <PillTagContainer
@@ -151,6 +153,12 @@ function SocialPill({
       <div>{children}</div>
       {!showSocialActions && (
         <SocialCountsContainer>
+          {isLoading && (
+            <SocialCount>
+              <SVGIcon size={'12'} type="dots" color={'var(--color-primary)'} />
+            </SocialCount>
+          )}
+
           {socialVals[1] > 0 && (
             <SocialCount>
               {socialContentArr[0]} {socialVals[1]}
