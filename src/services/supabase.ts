@@ -19,27 +19,6 @@ export type Json =
 export interface Database {
   public: {
     Tables: {
-      examples: {
-        Row: {
-          category_ids: number[] | null;
-          id: number;
-          name: string | null;
-          tag_ids: number[];
-        };
-        Insert: {
-          category_ids?: number[] | null;
-          id?: number;
-          name?: string | null;
-          tag_ids: number[];
-        };
-        Update: {
-          category_ids?: number[] | null;
-          id?: number;
-          name?: string | null;
-          tag_ids?: number[];
-        };
-        Relationships: [];
-      };
       skill_categories: {
         Row: {
           description: string | null;
@@ -58,6 +37,33 @@ export interface Database {
           id?: number;
           name?: string | null;
           tag_ids?: number[] | null;
+        };
+        Relationships: [];
+      };
+      skill_details: {
+        Row: {
+          description: string | null;
+          id: number;
+          link: string[] | null;
+          main: string | null;
+          skill_ids: number[] | null;
+          type: string | null;
+        };
+        Insert: {
+          description?: string | null;
+          id?: number;
+          link?: string[] | null;
+          main?: string | null;
+          skill_ids?: number[] | null;
+          type?: string | null;
+        };
+        Update: {
+          description?: string | null;
+          id?: number;
+          link?: string[] | null;
+          main?: string | null;
+          skill_ids?: number[] | null;
+          type?: string | null;
         };
         Relationships: [];
       };

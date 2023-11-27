@@ -111,3 +111,40 @@ export async function addAPISocialInteraction({
 
   return { data, error };
 }
+
+async function getAPISkillDetails() {
+  const { data: skillDetailsData, error: skillDetailsError } = await supabase
+    .from('skill_details')
+    .select();
+
+  if (skillDetailsError) {
+    dispatch(
+      setError({
+        type: 'skills',
+        message: 'Unable to retrieve Skill Details',
+      })
+    );
+    throw new Error('Skill Details not found');
+  }
+
+  return skillDetailsData;
+}
+
+export function useGetSkillDetails() {
+  const {
+    isLoading: skillDetailsLoading,
+    data: skillDetailsData,
+    error: skillDetailsError,
+  } = useQuery({
+    queryKey: ['skill_details'],
+    queryFn: () => {
+      return getAPISkillDetails();
+    },
+  });
+
+  return {
+    skillDetailsLoading,
+    skillDetailsData,
+    skillDetailsError,
+  };
+}

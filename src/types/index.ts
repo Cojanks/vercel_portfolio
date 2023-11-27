@@ -1,12 +1,11 @@
+import { Database } from '../services/supabase';
+
 // API
 export type TagDefinitionsType = {
   [key: number]: string;
 };
 
-export type TagDBType = {
-  id: number;
-  name: string;
-};
+export type TagDBType = Database['public']['Tables']['skill_tags']['Row'];
 
 export type CategoryDBType = {
   id: number;
@@ -48,6 +47,9 @@ export type TimelineDBType = {
   startDate: string;
   startingDetails: string | null;
 };
+
+export type SkillDetailsDBType =
+  Database['public']['Tables']['skill_details']['Row'];
 
 // Easter Eggs
 export type EggListType = {

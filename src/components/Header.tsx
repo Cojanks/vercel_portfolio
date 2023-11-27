@@ -256,13 +256,13 @@ function Header() {
 
       <HamburgerContainer>
         <SocialsContainer>
-          <a href="https://github.com/cojanks">
+          <a href="https://github.com/cojanks" target="_blank">
             <SocialIcon type="github" />
           </a>
-          <a href="mailto:cojanks@gmail.com">
+          <a href="mailto:cojanks@gmail.com" target="_blank">
             <SocialIcon type="email" />
           </a>
-          <a href="https://www.linkedin.com/in/cojanks/">
+          <a href="https://www.linkedin.com/in/cojanks/" target="_blank">
             <SocialIcon type="linkedin" />
           </a>
         </SocialsContainer>

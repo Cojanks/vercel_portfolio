@@ -1,6 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { DefinitionsType } from '../../types';
-import { Database } from '../../services/supabase';
+import { DefinitionsType, TagDBType } from '../../types';
 
 const initialState: DefinitionsType = {
   tags: {},
@@ -14,7 +13,7 @@ export const definitionsSlice = createSlice({
     setTags: (
       state: DefinitionsType,
       action: PayloadAction<{
-        tags: Database['public']['Tables']['skill_tags']['Row'][];
+        tags: TagDBType[];
       }>
     ) => {
       state.tags =

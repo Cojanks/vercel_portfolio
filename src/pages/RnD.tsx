@@ -2,6 +2,8 @@ import styled from 'styled-components';
 import SocialPill from '../components/SocialPill';
 import Tooltip from '../components/Tooltip';
 import { useRef } from 'react';
+import { useGetSkillDetails } from '../services/apiDefinitions';
+import Accordion from '../components/Accordion';
 
 const SectionContainer = styled.div`
   display: block;
@@ -26,6 +28,9 @@ const Box = styled.div`
 `;
 
 function RnD() {
+  const { skillDetailsData } = useGetSkillDetails();
+
+  console.log(skillDetailsData);
   const box1Ref = useRef<HTMLDivElement>(null);
   const box4Ref = useRef<HTMLDivElement>(null);
   const linkRef = useRef<HTMLAnchorElement>(null);
@@ -33,6 +38,7 @@ function RnD() {
   function socialClick(socialIndex: number) {
     console.log(socialIndex);
   }
+
   return (
     <SectionContainer>
       <h2>Component Skunkworks Division</h2>
@@ -70,6 +76,9 @@ function RnD() {
           Please Visit!
         </Tooltip>
       </BoxRow>
+
+      <br />
+      {skillDetailsData && <Accordion items={skillDetailsData} />}
     </SectionContainer>
   );
 }
