@@ -1,23 +1,28 @@
 import { Database } from '../services/supabase';
 
 // API
-export type TagDefinitionsType = {
-  [key: number]: string;
-};
-
+export type SkillDetailsDBType =
+  Database['public']['Tables']['skill_details']['Row'];
 export type TagDBType = Database['public']['Tables']['skill_tags']['Row'];
+export type CategoriesDBType =
+  Database['public']['Tables']['skill_categories']['Row'];
+export type TimelineDBType =
+  Database['public']['Tables']['work_timeline']['Row'];
 
-export type CategoryDBType = {
-  id: number;
-  name: string;
-  description: string;
-  tag_ids: number[];
+export type TagDefinitionsType = {
+  [key: number]: {
+    name: string;
+    detail_ids: number[];
+  };
 };
 
 export type DefinitionsType = {
   tags: TagDefinitionsType;
   errors: {
     [key: string]: string;
+  };
+  details: {
+    [key: number]: Database['public']['Tables']['skill_details']['Row'];
   };
 };
 
@@ -31,25 +36,6 @@ export type CategoryListSocialsType = {
   isLoading: boolean;
   tagSocialData: SocialsType;
 };
-
-export type TimelineDBType = {
-  id: number;
-  company: string;
-  contentList: string[];
-  endDate: string;
-  endingDetails: string | null;
-  extraEvent: {
-    title: string;
-    details: string;
-  } | null;
-  iconList: string[];
-  position: string;
-  startDate: string;
-  startingDetails: string | null;
-};
-
-export type SkillDetailsDBType =
-  Database['public']['Tables']['skill_details']['Row'];
 
 // Easter Eggs
 export type EggListType = {
@@ -70,4 +56,5 @@ export interface EasterEggsStoreType {
 export type PageSettingsType = {
   primaryColor: string;
   isAdmin: boolean;
+  activeTags: number[];
 };

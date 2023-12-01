@@ -1,9 +1,10 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { DefinitionsType, TagDBType } from '../../types';
+import { DefinitionsType, SkillDetailsDBType, TagDBType } from '../../types';
 
 const initialState: DefinitionsType = {
   tags: {},
   errors: {},
+  details: {},
 };
 
 export const definitionsSlice = createSlice({
@@ -20,9 +21,25 @@ export const definitionsSlice = createSlice({
         Object.keys(state.tags).length >= 1
           ? state.tags
           : action.payload.tags.reduce((accumulator, value) => {
-              return { ...accumulator, [value.id]: value.name };
+              return {
+                ...accumulator,
+                [value.id]: { name: value.name, detail_ids: value.detail_ids },
+              };
             }, {});
       state.errors = {};
+    },
+    setDetails: (
+      state: DefinitionsType,
+      action: PayloadAction<{
+        details: SkillDetailsDBType[];
+      }>
+    ) => {
+      state.details = action.payload.details.reduce((accumulator, value) => {
+        return {
+          ...accumulator,
+          [value.id]: value,
+        };
+      }, {});
     },
     setError: (
       state: DefinitionsType,
@@ -35,5 +52,5 @@ export const definitionsSlice = createSlice({
   },
 });
 
-export const { setTags, setError } = definitionsSlice.actions;
+export const { setTags, setDetails, setError } = definitionsSlice.actions;
 export default definitionsSlice.reducer;

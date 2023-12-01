@@ -2,9 +2,10 @@ import { useState } from 'react';
 import { SkillDetailsDBType } from '../types';
 import styled from 'styled-components';
 import { SVGIcon } from './Icons';
+import { capitalizeWord } from '../utility';
 
 const AccordionItemContainer = styled.div`
-  padding: 10px 0;
+  padding: 10px 0 10px 20px;
   & + & {
     border-top: 1px solid var(--color-text-secondary);
   }
@@ -24,14 +25,20 @@ const AccordionItemHeader = styled.div`
 
 const AccordionItemTag = styled.div`
   display: flex;
-  background-color: var(--color-primary);
+  color: var(--color-primary);
+  font-weight: 600;
   padding: 7px 14px;
-  border-radius: var(--border-radius-xlg);
 `;
 
 const AccordionItemContent = styled.div`
   display: flex;
+  flex-direction: column;
   padding: 10px 0 20px 20px;
+
+  & a {
+    display: block;
+    margin-top: 10px;
+  }
 `;
 
 type AccordionItemType = {
@@ -54,16 +61,18 @@ function AccordionItem({ item }: AccordionItemType) {
             color="var(--color-text)"
             size="14"
           />
-          [{item.type}] {item.main}
+          {item.main}
         </span>
-        <AccordionItemTag>Tag here</AccordionItemTag>
+        {item.type && (
+          <AccordionItemTag>[ {capitalizeWord(item.type)} ]</AccordionItemTag>
+        )}
       </AccordionItemHeader>
       {isOpen && (
         <AccordionItemContent>
           <div>{item.description}</div>
           {item.link && (
             <a target="_blank" href={item.link[1]}>
-              {item.link[0]}
+              [ {item.link[0]} ]
             </a>
           )}
         </AccordionItemContent>

@@ -38,3 +38,11 @@ export function hexToRGB(hex: string, alpha = '1') {
 
   return `rgba(${r}, ${g}, ${b}, ${alpha})`;
 }
+
+export function capitalizeWord(word: string) {
+  return word.charAt(0).toUpperCase() + word.slice(1);
+}
+
+export function capitalizeEveryWord(str: string) {
+  return str.replace(/(^\w{1})|(\s+\w{1})/g, (letter) => letter.toUpperCase());
+}

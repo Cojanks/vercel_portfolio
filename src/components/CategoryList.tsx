@@ -1,13 +1,10 @@
-import { TagDefinitionsType } from '../types';
+import { CategoriesDBType } from '../types';
 import styled from 'styled-components';
 import CategoryListItem from './CategoryListItem';
-import { Database } from '../services/supabase';
 
 type CategoryListType = {
-  categories: Database['public']['Tables']['skill_categories']['Row'][];
-  tags: TagDefinitionsType;
+  categories: CategoriesDBType[];
 };
-// TODO: remove optional above
 
 const CategoryListContainer = styled.div`
   display: flex;
@@ -20,14 +17,15 @@ const CategoryListul = styled.ul`
   width: 100%;
   list-style: none;
   padding-left: 0;
+  margin-top: 50px;
 `;
 
-function CategoryList({ categories, tags }: CategoryListType) {
+function CategoryList({ categories }: CategoryListType) {
   return (
     <CategoryListContainer>
       <CategoryListul>
         {categories.map((cat, i) => {
-          return <CategoryListItem key={i} item={cat} tags={tags} />;
+          return <CategoryListItem key={i} item={cat} />;
         })}
       </CategoryListul>
     </CategoryListContainer>

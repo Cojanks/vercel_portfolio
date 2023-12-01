@@ -1,5 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
-import { setError, setTags } from '../store/slices/definitionsSlice';
+import {
+  setDetails,
+  setError,
+  setTags,
+} from '../store/slices/definitionsSlice';
 import { dispatch } from '../store/store';
 import supabase from './supabase';
 import { settagSocials } from '../store/slices/socialsSlice';
@@ -89,9 +93,16 @@ export default function useGetSkillsData() {
     },
   });
 
+  const { error: skillDetailsError } = useQuery({
+    queryKey: ['skill_details'],
+    queryFn: () => {
+      return getAPISkillDetails();
+    },
+  });
+
   return {
     isLoading: tagLoading || categoryLoading,
-    error: tagError || categoryError || socialsError,
+    error: tagError || categoryError || socialsError || skillDetailsError,
     data: categoriesData,
   };
 }
@@ -127,6 +138,7 @@ async function getAPISkillDetails() {
     throw new Error('Skill Details not found');
   }
 
+  dispatch(setDetails({ details: skillDetailsData }));
   return skillDetailsData;
 }
 

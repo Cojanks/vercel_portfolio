@@ -2,9 +2,6 @@ import { PropsWithChildren, useState } from 'react';
 import styled from 'styled-components';
 import { dispatch, useSelector } from '../store/store';
 import { updateTagSocialByTagId } from '../store/slices/socialsSlice';
-import { addAPISocialInteraction } from '../services/apiDefinitions';
-import { useMutation } from '@tanstack/react-query';
-import { queryClient } from '../App';
 import { SVGIcon } from './Icons';
 
 type CustomizationType = {
@@ -35,12 +32,21 @@ const PillTagContainer = styled.div<CustomizationType>`
     border-color: var(--use-color);
     background-color: transparent;
     color: var(--use-color);
+
+    &:hover {
+      background-color: var(--color-background-light);
+    }
   }
 
   &.filled {
     border-color: var(--use-color);
     background-color: var(--use-color);
     color: var(--color-background);
+
+    &:hover {
+      background-color: var(--color-primary-dark);
+      border-color: var(--color-primary-dark);
+    }
   }
 `;
 
@@ -102,6 +108,18 @@ const SocialCount = styled.div`
   font-size: 12px;
   color: var(--color-primary);
   white-space: nowrap;
+
+  .filled & {
+    border-color: var(--color-primary);
+    background-color: var(--color-background);
+    color: var(--color-primary);
+  }
+
+  .inverted & {
+    border-color: var(--color-background);
+    background-color: var(--color-primary);
+    color: var(--color-background);
+  }
 `;
 
 type PillTagType = {
@@ -111,6 +129,7 @@ type PillTagType = {
   color?: string;
   socialContentArr?: string[];
   socialVals: { [key: number]: number };
+  toggleable?: boolean;
   handleSocialClick?: (socialInd: number) => void;
   handlePillClick?: () => void;
 } & PropsWithChildren;
@@ -121,25 +140,20 @@ function SocialPill({
   type = 'primary',
   socialContentArr = ['👍', '🔥'],
   handlePillClick,
+  toggleable = false,
   tagId = 10000,
   socialVals,
   color,
 }: PillTagType) {
   const [showSocialActions, setshowSocialActions] = useState(false);
-  const mutation = useMutation({
-    mutationFn: addAPISocialInteraction,
-    onSettled: () => {
-      queryClient.invalidateQueries({ queryKey: ['socials'] });
-    },
-  });
-  const isAdmin = useSelector((state) => state.pageSettings.isAdmin);
+  const [isInverted, setisInverted] = useState(inverted);
   const isLoading = useSelector((state) => state.tagSocials.isLoading);
 
   return (
     <PillTagContainer
       $pillType={type}
       $color={color ? color : ''}
-      className={`pill${inverted ? ' inverted' : ' filled'}`}
+      className={`pill${isInverted ? ' inverted' : ' filled'}`}
       onMouseEnter={() => {
         setshowSocialActions(true);
       }}
@@ -148,6 +162,7 @@ function SocialPill({
       }}
       onClick={() => {
         handlePillClick && handlePillClick();
+        toggleable && setisInverted((state) => !state);
       }}
     >
       <div>{children}</div>
@@ -155,7 +170,13 @@ function SocialPill({
         <SocialCountsContainer>
           {isLoading && (
             <SocialCount>
-              <SVGIcon size={'12'} type="dots" color={'var(--color-primary)'} />
+              <SVGIcon
+                size={'12'}
+                type="dots"
+                color={`${
+                  inverted ? 'var(--color-background)' : 'var(--color-primary)'
+                }`}
+              />
             </SocialCount>
           )}
 
@@ -178,14 +199,13 @@ function SocialPill({
           <SocialButton
             onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
               e.stopPropagation();
-              !isAdmin &&
-                dispatch(
-                  updateTagSocialByTagId({
-                    tagId: tagId,
-                    socialCount: { ...socialVals, 1: socialVals[1] + 1 },
-                  })
-                );
-              isAdmin && mutation.mutate({ tagId: tagId, socialAction: 1 });
+              dispatch(
+                updateTagSocialByTagId({
+                  tagId: tagId,
+                  socialCount: { ...socialVals, 1: socialVals[1] + 1 },
+                })
+              );
+              console.log('Ooo, thanks for the interaction. +1 Charisma');
             }}
           >
             {socialContentArr[0]}
@@ -193,14 +213,13 @@ function SocialPill({
           <SocialButton
             onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
               e.stopPropagation();
-              !isAdmin &&
-                dispatch(
-                  updateTagSocialByTagId({
-                    tagId: tagId,
-                    socialCount: { ...socialVals, 2: socialVals[2] + 1 },
-                  })
-                );
-              isAdmin && mutation.mutate({ tagId: tagId, socialAction: 2 });
+              dispatch(
+                updateTagSocialByTagId({
+                  tagId: tagId,
+                  socialCount: { ...socialVals, 2: socialVals[2] + 1 },
+                })
+              );
+              console.log('Ooo, thanks for the interaction. +1 Charisma');
             }}
           >
             {socialContentArr[1]}

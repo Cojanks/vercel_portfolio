@@ -24,19 +24,19 @@ export interface Database {
           description: string | null;
           id: number;
           name: string | null;
-          tag_ids: number[] | null;
+          tag_ids: number[];
         };
         Insert: {
           description?: string | null;
           id?: number;
           name?: string | null;
-          tag_ids?: number[] | null;
+          tag_ids?: number[];
         };
         Update: {
           description?: string | null;
           id?: number;
           name?: string | null;
-          tag_ids?: number[] | null;
+          tag_ids?: number[];
         };
         Relationships: [];
       };
@@ -46,7 +46,6 @@ export interface Database {
           id: number;
           link: string[] | null;
           main: string | null;
-          skill_ids: number[] | null;
           type: string | null;
         };
         Insert: {
@@ -54,7 +53,6 @@ export interface Database {
           id?: number;
           link?: string[] | null;
           main?: string | null;
-          skill_ids?: number[] | null;
           type?: string | null;
         };
         Update: {
@@ -62,21 +60,23 @@ export interface Database {
           id?: number;
           link?: string[] | null;
           main?: string | null;
-          skill_ids?: number[] | null;
           type?: string | null;
         };
         Relationships: [];
       };
       skill_tags: {
         Row: {
+          detail_ids: number[];
           id: number;
           name: string | null;
         };
         Insert: {
+          detail_ids?: number[];
           id?: number;
           name?: string | null;
         };
         Update: {
+          detail_ids?: number[];
           id?: number;
           name?: string | null;
         };

@@ -1,7 +1,6 @@
 import CategoryList from '../components/CategoryList';
 import useGetSkillsData from '../services/apiDefinitions';
 import Error from './Error';
-import { useSelector } from '../store/store';
 import styled from 'styled-components';
 import Loader from '../components/Loader';
 import Alert from '../components/Alert';
@@ -19,8 +18,6 @@ function Skills() {
   const [showAlert, setshowAlert] = useState(true);
 
   const { isLoading, error, data: categoriesData } = useGetSkillsData();
-
-  const tags = useSelector((state) => state.definitions.tags);
 
   if (isLoading) return <Loader type="page" numBars={7} size={'chonk'} />;
   if (error) return <Error type="database" />;
@@ -53,7 +50,7 @@ function Skills() {
       </p>
 
       {categoriesData && (
-        <CategoryList categories={categoriesData} tags={tags}></CategoryList>
+        <CategoryList categories={categoriesData}></CategoryList>
       )}
       <Bottom />
     </SectionContainer>

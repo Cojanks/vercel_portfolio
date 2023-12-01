@@ -8,11 +8,13 @@ export const GlobalStyles = createGlobalStyle`
 :root {
   /* Category */
   --color-background: #1a171e;
+   --color-background-light: #33252f;
 
   --color-text: #d1d5db;
   --color-text-secondary: #6b7280;
 
   --color-primary: #e92d77;
+  --color-primary-dark: #b91f5b;
   --color-primary-background: rgba(233, 45, 119, 0.05);
   --color-secondary: #6f2232;
   --color-tertiary: #8030e4;
@@ -95,7 +97,9 @@ a {
   }
 }
 
-
+p {
+  margin: 0;
+}
 
 
 `;

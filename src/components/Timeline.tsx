@@ -1,11 +1,12 @@
 import styled from 'styled-components';
 import { IconTypes, SVGIcon } from './Icons';
 import { transformDate } from '../utility';
-import { Database } from '../services/supabase';
+import { TimelineDBType } from '../types';
 
 const TimelineContainer = styled.div`
   position: relative;
   max-width: 1000px;
+  margin-top: 30px;
 `;
 
 const TimelineVisualLine = styled.div`
@@ -161,11 +162,7 @@ const TimelinePosition = styled.div`
   font-weight: 500;
 `;
 
-function Timeline({
-  eventList,
-}: {
-  eventList: Database['public']['Tables']['work_timeline']['Row'][];
-}) {
+function Timeline({ eventList }: { eventList: TimelineDBType[] }) {
   return (
     <TimelineContainer>
       <TimelineVisualLine />

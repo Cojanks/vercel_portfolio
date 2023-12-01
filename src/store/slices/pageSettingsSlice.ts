@@ -4,6 +4,7 @@ import { PageSettingsType } from '../../types';
 const initialState: PageSettingsType = {
   primaryColor: '',
   isAdmin: false,
+  activeTags: [],
 };
 
 export const pageSettingsSlice = createSlice({

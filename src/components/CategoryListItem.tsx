@@ -1,22 +1,25 @@
 import styled from 'styled-components';
-import { TagDefinitionsType } from '../types';
+import { CategoriesDBType } from '../types';
 import Card from './Card';
 import { deviceQuery } from '../styles/breakpoints';
 import SocialPill from './SocialPill';
-import { Database } from '../services/supabase';
 import { useSelector } from '../store/store';
+import Accordion from './Accordion';
+import { useState } from 'react';
 
 const ListItem_Li = styled.li`
   display: flex;
   flex-direction: row;
   width: 100%;
   margin-bottom: 55px;
-  gap: 40px;
+  column-gap: 40px;
+  flex-wrap: wrap;
 
   @media only screen and (${deviceQuery.tabletMax}) {
     flex-direction: column;
     gap: 5px;
     margin-bottom: 75px;
+    flex-wrap: nowrap;
   }
 `;
 
@@ -45,27 +48,49 @@ const PillContainer = styled.div`
   flex-wrap: wrap;
 `;
 
-function CategoryListItem({
-  item,
-  tags,
-}: {
-  item: Database['public']['Tables']['skill_categories']['Row'];
-  tags: TagDefinitionsType;
-}) {
-  function getTagSocialData(id: number) {
-    return (
-      useSelector((state) => state.tagSocials.tagSocialData[id]) || {
-        1: 0,
-        2: 0,
-      }
-    );
+const ShowAccordionHint = styled.div`
+  margin-top: 30px;
+  color: var(--color-text-secondary);
+`;
+
+function getSocialContentIcons(id: number) {
+  if (id === 30) return ['🐶', '🥺'];
+  if (id === 27) return ['📚', '📖'];
+  if (id === 15) return ['✍️', '✅'];
+  return ['👍', '🔥'];
+}
+
+function getTagSocialData(id: number) {
+  return (
+    useSelector((state) => state.tagSocials.tagSocialData[id]) || {
+      1: 0,
+      2: 0,
+    }
+  );
+}
+
+function CategoryListItem({ item }: { item: CategoriesDBType }) {
+  const [activeCatTags, setactiveCatTags] = useState<number[]>([]);
+
+  function handleTagChange(id: number) {
+    if (!activeCatTags.includes(id)) {
+      setactiveCatTags((state) => [...state, id]);
+    } else {
+      setactiveCatTags((state) => state.filter((newId) => newId !== id));
+    }
   }
 
-  function getCustomSocialContent(id: number) {
-    if (id === 30) return ['🐶', '🥺'];
-    if (id === 27) return ['📚', '📖'];
-    if (id === 15) return ['✍️', '✅'];
-    return ['👍', '🔥'];
+  function buildAccordionList() {
+    const details = useSelector((state) => state.definitions.details);
+    const tags = useSelector((state) => state.definitions.tags);
+    let skillDetailIds: number[] = [];
+
+    for (const tagId of activeCatTags) {
+      skillDetailIds = skillDetailIds.concat(tags[tagId].detail_ids);
+    }
+
+    return [...new Set(skillDetailIds)].map((detailId) => details[detailId]);
+    // Removes duplicates *and* returns an array of detail objects.
   }
 
   return (
@@ -73,6 +98,10 @@ function CategoryListItem({
       <ListItem_SectionContaier>
         <ListItemLi_H3>{item.name}</ListItemLi_H3>
         <ListItemLi_p>{item.description}</ListItemLi_p>
+        <ShowAccordionHint>
+          Click any of the skills to view examples or musings on these subjects.
+        </ShowAccordionHint>
+        <Accordion items={buildAccordionList()} />
       </ListItem_SectionContaier>
       <ListItem_SectionContaier>
         <Card
@@ -87,10 +116,15 @@ function CategoryListItem({
                   <SocialPill
                     key={id}
                     tagId={id}
+                    toggleable={true}
+                    inverted={!activeCatTags.includes(id)}
                     socialVals={getTagSocialData(id)}
-                    socialContentArr={getCustomSocialContent(id)}
+                    socialContentArr={getSocialContentIcons(id)}
+                    handlePillClick={() => {
+                      handleTagChange(id);
+                    }}
                   >
-                    {tags[id]}
+                    {useSelector((state) => state.definitions.tags[id].name)}
                   </SocialPill>
                 );
               })}
@@ -100,5 +134,4 @@ function CategoryListItem({
     </ListItem_Li>
   );
 }
-
 export default CategoryListItem;
