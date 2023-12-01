@@ -70,7 +70,7 @@ function AccordionItem({ item }: AccordionItemType) {
       {isOpen && (
         <AccordionItemContent>
           <div>{item.description}</div>
-          {item.link && (
+          {item.link && item.link.length > 0 && (
             <a target="_blank" href={item.link[1]}>
               [ {item.link[0]} ]
             </a>
