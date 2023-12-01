@@ -52,6 +52,14 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
+  console.log(
+    "Welcome to my Portfolio! Resumes can only tell you so much and I agree with Anton Chekhov when he says 'Don't tell me the moon is shining; show me the glint of light on broken glass.' "
+  );
+  console.log('So please, let me show you my skills, my work, and myself.');
+  console.log('...');
+  console.log(
+    '(I may have also hidden easter eggs and hidden interactions all over the place, feel free to try and find them all!)'
+  );
   return (
     <>
       <GlobalStyles />
