@@ -8,6 +8,7 @@ import Skills from './pages/Skills';
 import Error from './pages/Error';
 import History from './pages/History';
 import RnD from './pages/RnD';
+import RideShare from './pages/RideShare';
 
 export const queryClient = new QueryClient({
   defaultOptions: {
@@ -42,6 +43,11 @@ const router = createBrowserRouter([
         path: '/rnd',
         element: <RnD />,
         errorElement: <Error type="under-construction" />,
+      },
+      {
+        path: '/rs',
+        element: <RideShare />,
+        errorElement: <Error type="generic" />,
       },
       {
         path: '/*',

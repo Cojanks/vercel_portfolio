@@ -51,10 +51,3 @@ export interface EasterEggsStoreType {
   eggList: EggListType;
   eggInteractionsList: InteractionsListType;
 }
-
-// Page Settings
-export type PageSettingsType = {
-  primaryColor: string;
-  isAdmin: boolean;
-  activeTags: number[];
-};
