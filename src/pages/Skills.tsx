@@ -3,9 +3,6 @@ import useGetSkillsData from '../services/apiDefinitions';
 import Error from './Error';
 import styled from 'styled-components';
 import Loader from '../components/Loader';
-import Alert from '../components/Alert';
-import { getNumDaysSinceStart } from '../utility';
-import { useState } from 'react';
 import Bottom from '../components/Bottom';
 
 const SectionContainer = styled.section`
@@ -15,8 +12,6 @@ const SectionContainer = styled.section`
 `;
 
 function Skills() {
-  const [showAlert, setshowAlert] = useState(true);
-
   const { isLoading, error, data: categoriesData } = useGetSkillsData();
 
   if (isLoading) return <Loader type="page" numBars={7} size={'chonk'} />;
@@ -24,25 +19,6 @@ function Skills() {
 
   return (
     <SectionContainer>
-      {showAlert && (
-        <Alert
-          dismissible={true}
-          type="warning"
-          handleClose={() => setshowAlert(false)}
-        >
-          <div>This page is being worked on!</div>
-          <br />
-          <div>
-            Think about all the best features your users love and how long they
-            took to implement.
-          </div>
-          <div>
-            Great work takes time!{' '}
-            <span className="whisper">{getNumDaysSinceStart()}</span>
-          </div>
-        </Alert>
-      )}
-
       <h2>Technical expertise</h2>
       <p>
         Looking for an engineer with a particular skillset? Let's see how I can
