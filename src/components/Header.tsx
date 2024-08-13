@@ -51,39 +51,6 @@ const IconContainer = styled.div`
   }
 `;
 
-const LogoText = styled.div`
-  padding: 12px;
-  border: 3px solid var(--color-text);
-  display: inline;
-  border-radius: 50%;
-
-  @keyframes gradientAnimation {
-    0% {
-      background-position: 0;
-    }
-    to {
-      background-position: 100%;
-    }
-  }
-
-  background-image: linear-gradient(
-    90deg,
-    var(--color-text),
-    var(--color-primary),
-    var(--color-text)
-  );
-  color: transparent;
-  -webkit-background-clip: text; /* Edge, Chrome */
-  background-clip: text; /* Safari, FF */
-  animation: gradientAnimation 4s ease-in-out infinite;
-  animation-direction: alternate;
-  background-size: 300% 100%;
-
-  @media only screen and (${deviceQuery.mobileTabletMax}) {
-    display: none;
-  }
-`;
-
 const NavUl = styled.ul`
   grid-column: 2;
   list-style: none;
@@ -224,10 +191,6 @@ const MobileNavBackdrop = styled.div`
 function Header() {
   const [didSomeoneOrderAnOpenSandwich, setDidSomeoneOrderAnOpenSandwich] =
     useState(false);
-
-  function handleLogoClick() {
-    dispatch(logoClicked());
-  }
 
   function toggleMobileMenuState() {
     setDidSomeoneOrderAnOpenSandwich((state) => !state);
