@@ -83,6 +83,19 @@ const SocialActionContainer = styled.div<CustomizationType>`
   right: -7px;
   z-index: 2;
 
+  @keyframes grow {
+    0% {
+      transform: scale(0);
+      -webkit-transform: scale(0);
+    }
+    100% {
+      transform: scale(1);
+      -webkit-transform: scale(1);
+    }
+  }
+
+  animation: grow 0.2s ease-in-out;
+
   ${SocialButton}:first-child {
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
