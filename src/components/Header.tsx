@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 import { deviceQuery } from '../styles/breakpoints';
-import { dispatch } from '../store/store';
-import { logoClicked } from '../store/slices/easterEggsSlice';
 import Hamburger from './Hamburger';
 import { useState } from 'react';
 import SocialIcon from './SocialIcon';
