@@ -35,9 +35,7 @@ const Inner = styled.div`
   position: absolute;
   width: 30px;
   height: 2px;
-  transition-timing-function: ease;
-  transition-duration: 0.15s;
-  transition-property: transform;
+  transition: transform 0.15s ease;
   border-radius: 4px;
   background-color: var(--color-text-secondary);
 
@@ -48,9 +46,7 @@ const Inner = styled.div`
     position: absolute;
     width: 30px;
     height: 2px;
-    transition-timing-function: ease;
-    transition-duration: 0.15s;
-    transition-property: transform;
+    transition: transform 0.15s ease;
     border-radius: 4px;
     background-color: var(--color-text-secondary);
   }

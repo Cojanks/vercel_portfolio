@@ -20,9 +20,9 @@ const SocialContainer = styled.div<{ $color: string; $hoverColor: string }>`
   }
 
   & svg {
-    -webkit-transition: color 0.1s;
-    -moz-transition: color 0.1s;
-    transition: color 0.1s;
+    -webkit-transition: color 0.3s;
+    -moz-transition: color 0.3s;
+    transition: color 0.3s;
     color: ${(props) => props.$color};
   }
 `;

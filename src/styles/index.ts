@@ -69,8 +69,6 @@ body {
   font-weight: 400;
   height: 100%;
 
-
-  transition: color 0.3s, background-color 0.3s;
 }
 
 .primary {

@@ -6,6 +6,7 @@ import Hamburger from './Hamburger';
 import { useState } from 'react';
 import SocialIcon from './SocialIcon';
 import { LinkWithQuery } from './LinkWithQuery';
+import Icon from './Icon';
 
 const HeaderContainer = styled.div`
   position: relative;
@@ -39,7 +40,15 @@ const LogoContainer = styled.div`
   font-weight: 500;
   font-size: 2em;
   text-align: center;
-  cursor: pointer;
+  cursor: default;
+`;
+
+const IconContainer = styled.div`
+  display: inline;
+
+  @media only screen and (${deviceQuery.mobileTabletMax}) {
+    display: none;
+  }
 `;
 
 const LogoText = styled.div`
@@ -47,6 +56,28 @@ const LogoText = styled.div`
   border: 3px solid var(--color-text);
   display: inline;
   border-radius: 50%;
+
+  @keyframes gradientAnimation {
+    0% {
+      background-position: 0;
+    }
+    to {
+      background-position: 100%;
+    }
+  }
+
+  background-image: linear-gradient(
+    90deg,
+    var(--color-text),
+    var(--color-primary),
+    var(--color-text)
+  );
+  color: transparent;
+  -webkit-background-clip: text; /* Edge, Chrome */
+  background-clip: text; /* Safari, FF */
+  animation: gradientAnimation 4s ease-in-out infinite;
+  animation-direction: alternate;
+  background-size: 300% 100%;
 
   @media only screen and (${deviceQuery.mobileTabletMax}) {
     display: none;
@@ -204,13 +235,10 @@ function Header() {
   return (
     <HeaderContainer>
       <LogoContainer>
-        <LogoText
-          onClick={() => {
-            handleLogoClick();
-          }}
-        >
-          C J{' '}
-        </LogoText>
+        <IconContainer>
+          <Icon />
+        </IconContainer>
+
         <Hamburger
           didSomeoneOrderAnOpenSandwich={didSomeoneOrderAnOpenSandwich}
           handleHamburgerToggle={() => {
