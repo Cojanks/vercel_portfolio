@@ -57,6 +57,7 @@ const SocialButton = styled.button`
   background-color: var(--color-background);
   color: var(--use-color);
   padding: 7px 12px 5px;
+  transition: background-color 0.4s ease-in-out;
 
   &:hover {
     background-color: var(--color-secondary);

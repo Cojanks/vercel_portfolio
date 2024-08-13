@@ -113,9 +113,9 @@ const NavItemLink = styled(LinkWithQuery)`
   text-decoration: none;
   position: relative;
   font-size: 1.3em;
-  -webkit-transition: color 0.1s;
-  -moz-transition: color 0.1s;
-  transition: color 0.1s;
+  -webkit-transition: color 0.3s;
+  -moz-transition: color 0.3s;
+  transition: color 0.3s;
 
   &:visited {
     color: var(--color-text);
