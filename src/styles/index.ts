@@ -15,7 +15,7 @@ export const GlobalStyles = createGlobalStyle`
 
   --color-primary: #e92d77;
   --color-primary-dark: #b91f5b;
-  --color-primary-background: rgba(233, 45, 119, 0.05);
+  --color-primary-background: #2b1621;
   --color-secondary: #6f2232;
   --color-tertiary: #8030e4;
 

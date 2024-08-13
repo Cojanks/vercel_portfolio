@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { IconTypes, SVGIcon } from './Icons';
 import { transformDate } from '../utility';
 import { TimelineDBType } from '../types';
+import { deviceQuery } from '../styles/breakpoints';
 
 const TimelineContainer = styled.div`
   position: relative;
@@ -15,8 +16,59 @@ const TimelineVisualLine = styled.div`
   top: 2px;
   bottom: 2px;
   width: 2px;
-  background-color: var(--color-primary);
+  /* background-color: var(--color-primary); */
   border-radius: 1px;
+
+  @-webkit-keyframes lineGradient {
+    0% {
+      background-position: 50% 0%;
+    }
+    50% {
+      background-position: 50% 100%;
+    }
+    100% {
+      background-position: 50% 0%;
+    }
+  }
+  @-moz-keyframes lineGradient {
+    0% {
+      background-position: 50% 0%;
+    }
+    50% {
+      background-position: 50% 100%;
+    }
+    100% {
+      background-position: 50% 0%;
+    }
+  }
+  @keyframes lineGradient {
+    0% {
+      background-position: 50% 0%;
+    }
+    50% {
+      background-position: 50% 100%;
+    }
+    100% {
+      background-position: 50% 0%;
+    }
+  }
+
+  background: linear-gradient(
+    180deg,
+    var(--color-primary),
+    var(--color-background),
+    var(--color-primary)
+  );
+  background-size: 400% 400%;
+
+  -webkit-animation: lineGradient 12s ease infinite;
+  -moz-animation: lineGradient 12s ease infinite;
+  animation: lineGradient 12s ease infinite;
+  animation-iteration-count: infinite;
+
+  @media only screen and (${deviceQuery.mobileTabletMax}) {
+    left: 11px;
+  }
 `;
 
 const TimelineContentContainer = styled.div``;
@@ -25,6 +77,11 @@ const TimelineUl = styled.ul`
   margin: 0 20px !important;
   font-weight: 300;
   letter-spacing: 0.2px;
+
+  @media only screen and (${deviceQuery.mobileTabletMax}) {
+    margin: 0 10px !important;
+    padding-left: 30px;
+  }
 `;
 
 const TimelineBlockArrow = styled.span`
@@ -50,6 +107,10 @@ const TimelineLi = styled.li`
   padding: 20px;
   background: var(--color-background);
 
+  &:first-child:before {
+    background-color: var(--color-primary);
+  }
+
   &:before {
     background-color: var(--color-background);
     border: 2px solid var(--color-primary);
@@ -66,6 +127,10 @@ const TimelineLi = styled.li`
   &:hover {
     border-color: var(--color-secondary);
     background-color: var(--color-primary-background);
+
+    ${TimelineBlockArrow} {
+      background-color: var(--color-primary-background);
+    }
 
     &:before {
       background-color: var(--color-primary);

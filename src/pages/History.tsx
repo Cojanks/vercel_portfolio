@@ -4,11 +4,16 @@ import Error from './Error';
 import styled from 'styled-components';
 import useFetchTimelineData from '../services/apiTimeline';
 import Bottom from '../components/Bottom';
+import { deviceQuery } from '../styles/breakpoints';
 
 const SectionContainer = styled.div`
   display: block;
   width: 100%;
   margin: 15px 25px 0px;
+
+  @media only screen and (${deviceQuery.mobileTabletMax}) {
+    margin: 15px 20px 0px;
+  }
 `;
 
 function History() {
